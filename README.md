@@ -24,7 +24,7 @@ CREATE TABLE zwierzaki (
 );
 ```
 szczepienia
-
+```
 CREATE TABLE szczepienia (
     idszczepienia INT PRIMARY KEY,
     rodzaj_szczepienia VARCHAR(20),
@@ -33,9 +33,9 @@ CREATE TABLE szczepienia (
     idzwierzaka INT,
     FOREIGN KEY (idzwierzaka) REFERENCES zwierzaki(idzwierzaka)
 );
-
+```
 adoptujacy
-
+```
 CREATE TABLE adoptujacy(
     idosoby INT PRIMARY KEY,
     imie VARCHAR(20),
@@ -44,7 +44,7 @@ CREATE TABLE adoptujacy(
     dataadopcji DATE,
     FOREIGN KEY (idzwierzaka) REFERENCES zwierzaki(idzwierzaka)
 );
-
+```
 # Przykładowe dane
 INSERT INTO zwierzaki(rasa,gatunek,plec,wiek,dataprzyjecia) VALUES
 ('Owczarek niemiecki', 'Pies', 'Samiec',5,2023-06-19),
