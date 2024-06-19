@@ -16,51 +16,61 @@ Baza danych PostgreSQL składa się z trzech tabel:
 
 zwierzaki:
 
-CREATE TABLE car_rental.clients (
-    IDClient SERIAL PRIMARY KEY,
-    FirstName VARCHAR(50),
-    LastName VARCHAR(50),
-    Email VARCHAR(100)
+CREATE TABLE zwierzaki (
+    idzwierzaka INT PRIMARY KEY,
+    rasa VARCHAR(20),
+    gatunek VARCHAR(20),
+    plec VARCHAR(20),
+    wiek INT,
+    dataprzyjecia DATE
 );
 szczepienia
 
-CREATE TABLE car_rental.engine (
-    IDEngine SERIAL PRIMARY KEY,
-    Name VARCHAR(50),
- Power INT,
-    FuelType VARCHAR(50)
+CREATE TABLE szczepienia (
+    idszczepienia INT PRIMARY KEY,
+    rodzaj_szczepienia VARCHAR(20),
+    data_pierwszego_szczepienia DATE,
+    data_ostatniego_szczepienia DATE,
+    idzwierzaka INT,
+    FOREIGN KEY (idzwierzaka) REFERENCES zwierzaki(idzwierzaka)
 );
 adoptujacy
 
-CREATE TABLE car_rental.cars (
-    IDCar SERIAL PRIMARY KEY,
-    Brand VARCHAR(50),
-    Model VARCHAR(50),
-    IDEngine INT,
-    Price DECIMAL(9,2),
-    FOREIGN KEY (IDEngine) REFERENCES car_rental.engine(IDEngine)
+CREATE TABLE zwierzaki (
+    idzwierzaka INT PRIMARY KEY,
+    rasa VARCHAR(20),
+    gatunek VARCHAR(20),
+    plec VARCHAR(20),
+    wiek INT,
+    dataprzyjecia DATE
+);
+
+CREATE TABLE adoptujacy(
+    idosoby INT PRIMARY KEY,
+    imie VARCHAR(20),
+    nazwisko VARCHAR(20),
+    idzwierzaka INT,
+    dataadopcji DATE,
+    FOREIGN KEY (idzwierzaka) REFERENCES zwierzaki(idzwierzaka)
 );
 
 Przykładowe dane
-INSERT INTO car_rental.clients (FirstName, LastName, Email) VALUES
-('John', 'Smith', 'john@example.com'),
-('Alice', 'Johnson', 'alice@example.com'),
-('Emma', 'Davis', 'emma@example.com'),
-('Michael', 'Brown', 'michael@example.com');
+INSERT INTO zwierzaki(rasa,gatunek,plec,wiek,dataprzyjecia) VALUES
+('Owczarek niemiecki', 'Pies', 'Samiec',5,2023-06-19),
+('Rottweiler', 'Pies', 'Samica',3,2020-02-14),
+('Kot syjamski', 'Kot', 'Samica',2,2021-09-20),
+('Kot perski', 'Kot', 'Samiec',1,2024-04-05);
 
-INSERT INTO car_rental.engine (Name, Power, FuelType) VALUES
-('V8', 400, 'Petrol'),
-('V6', 300, 'Diesel'),
-('I4', 150, 'Electric');
+INSERT INTO szczepienia (rodzaj_szczepienia,data_pierwszego_szczepienia,data_ostatniego_szczepienia) VALUES
+('Wscieklizna', 2023-06-19, 2023-12-19),
+('Cyklowe', 2020-02-14, 2020-08-14),
+('Zywe', 2021-09-20, 2022-03-20);
 
-INSERT INTO car_rental.cars (Brand, Model, IDEngine, Price) VALUES
-('Toyota', 'Corolla', 3, 25000),
-('Ford', 'Mustang', 1, 45000),
-('BMW', 'X5', 2, 60000);
+INSERT INTO adoptujacy (imie,nazwisko,dataadopcji) VALUES
+('Jan', 'Kowalski', 3, 2023-12-10),
+('Anna', 'Nowak', 1, 2023-12-19),
+('Zdzislaw', 'Norek', 2, 2022-03-20);
 
-INSERT INTO car_rental.rented_car (IDClient, IDCar, Rented_Date, Rented_From, Rented_Until) VALUES
-(1, 1, '2024-06-10', '2024-06-10', '2024-06-12'),
-(2, 2, '2024-06-11', '2024-06-11', '2024-06-15');
 
 
 Autorzy
