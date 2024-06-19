@@ -1,5 +1,4 @@
 # Projekt Schronisko
-#Opis Projektu
 Projekt pozwala na zarządzanie RDB za pomocą GUI.Do stworzenia użyto JavaFx i Hibernate. Celem projektu jest umożliwienie studentom nauki tworzenia oprogramowania z GUI oraz obsługi relacyjnych baz danych.
 
 # Funkcjonalności
