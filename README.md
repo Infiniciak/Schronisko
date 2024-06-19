@@ -1,8 +1,8 @@
-#Projekt Schronisko
+# Projekt Schronisko
 #Opis Projektu
 Projekt pozwala na zarządzanie RDB za pomocą GUI.Do stworzenia użyto JavaFx i Hibernate. Celem projektu jest umożliwienie studentom nauki tworzenia oprogramowania z GUI oraz obsługi relacyjnych baz danych.
 
-#Funkcjonalności
+# Funkcjonalności
 
 Dodawanie rekordów do tabel bazy danych
 Usuwanie  rekordów z tabel bazy danych
@@ -53,7 +53,7 @@ CREATE TABLE adoptujacy(
     FOREIGN KEY (idzwierzaka) REFERENCES zwierzaki(idzwierzaka)
 );
 
-Przykładowe dane
+# Przykładowe dane
 INSERT INTO zwierzaki(rasa,gatunek,plec,wiek,dataprzyjecia) VALUES
 ('Owczarek niemiecki', 'Pies', 'Samiec',5,2023-06-19),
 ('Rottweiler', 'Pies', 'Samica',3,2020-02-14),
@@ -72,5 +72,5 @@ INSERT INTO adoptujacy (imie,nazwisko,dataadopcji) VALUES
 
 
 
-Autorzy
+# Autorzy
 Bartosz Winczowski, Emilia Szczęch,Nadia Schiffer,Filip Ślemp
