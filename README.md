@@ -11,7 +11,7 @@ Edytowanie wybranych rekordów z tabel bazy danych
 Ukazanie danych tabeli
 Czyszczenie wpisywanych pól
 
-Baza danych PostgreSQL składa się z trzech tabel:
+# Baza danych PostgreSQL składa się z trzech tabel:
 
 zwierzaki:
 
