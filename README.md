@@ -23,6 +23,7 @@ CREATE TABLE zwierzaki (
     wiek INT,
     dataprzyjecia DATE
 );
+
 szczepienia
 
 CREATE TABLE szczepienia (
@@ -33,16 +34,8 @@ CREATE TABLE szczepienia (
     idzwierzaka INT,
     FOREIGN KEY (idzwierzaka) REFERENCES zwierzaki(idzwierzaka)
 );
-adoptujacy
 
-CREATE TABLE zwierzaki (
-    idzwierzaka INT PRIMARY KEY,
-    rasa VARCHAR(20),
-    gatunek VARCHAR(20),
-    plec VARCHAR(20),
-    wiek INT,
-    dataprzyjecia DATE
-);
+adoptujacy
 
 CREATE TABLE adoptujacy(
     idosoby INT PRIMARY KEY,
