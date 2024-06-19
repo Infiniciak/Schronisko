@@ -1,23 +1,20 @@
-Projekt Wypożyczalni Samochodów
+Projekt Schronisko
 Opis Projektu
-Projekt ten jest aplikacją wypożyczalni samochodów zrealizowaną w języku Java, która pozwala na zarządzanie relacyjną bazą danych PostgreSQL za pomocą graficznego interfejsu użytkownika (GUI). Aplikacja została stworzona przy użyciu frameworków JavaFX (do GUI) oraz Hibernate (do komunikacji z bazą danych). Celem projektu jest umożliwienie studentom nauki tworzenia oprogramowania z GUI oraz obsługi relacyjnych baz danych.
+Projekt pozwala na zarządzanie RDB za pomocą GUI.Do stworzenia użyto JavaFx i Hibernate. Celem projektu jest umożliwienie studentom nauki tworzenia oprogramowania z GUI oraz obsługi relacyjnych baz danych.
 
 Funkcjonalności
-Aplikacja wypożyczalni samochodów umożliwia:
+Aplikacja schronisko daje możliwość:
 
-Dodawanie rekordów do poszczególnych tabel bazy danych
-Usuwanie wybranych rekordów z tabel
-Odczytywanie i operowanie na danych z tabel
-Edytowanie wybranych rekordów w bazie danych
-Technologie
-Język programowania: Java 21
-Framework do GUI: JavaFX
-Framework do ORM: Hibernate
-Baza danych: PostgreSQL
-Struktura Bazy Danych
-Baza danych PostgreSQL składa się z czterech głównych tabel w schemacie car_rental:
+Dodawanie rekordów do tabel bazy danych
+Usuwanie  rekordów z tabel bazy danych
+Odczytywanie i operowanie na rekordach z tabel bazy danych
+Edytowanie wybranych rekordów z tabel bazy danych
+Ukazanie danych tabeli
+Czyszczenie wpisywanych pól
 
-clients:
+Baza danych PostgreSQL składa się z trzech tabel:
+
+zwierzaki:
 
 CREATE TABLE car_rental.clients (
     IDClient SERIAL PRIMARY KEY,
@@ -25,7 +22,7 @@ CREATE TABLE car_rental.clients (
     LastName VARCHAR(50),
     Email VARCHAR(100)
 );
-engine
+szczepienia
 
 CREATE TABLE car_rental.engine (
     IDEngine SERIAL PRIMARY KEY,
@@ -33,7 +30,7 @@ CREATE TABLE car_rental.engine (
  Power INT,
     FuelType VARCHAR(50)
 );
-cars
+adoptujacy
 
 CREATE TABLE car_rental.cars (
     IDCar SERIAL PRIMARY KEY,
@@ -43,18 +40,7 @@ CREATE TABLE car_rental.cars (
     Price DECIMAL(9,2),
     FOREIGN KEY (IDEngine) REFERENCES car_rental.engine(IDEngine)
 );
-rented_car
 
-CREATE TABLE car_rental.rented_car (
-    IDRent SERIAL PRIMARY KEY,
-    IDClient INT,
-    IDCar INT,
-    Rented_Date TIMESTAMP,
-    Rented_From TIMESTAMP,
-    Rented_Until TIMESTAMP,
-    FOREIGN KEY (IDClient) REFERENCES car_rental.clients(IDClient),
-    FOREIGN KEY (IDCar) REFERENCES car_rental.cars(IDCar)
-);
 Przykładowe dane
 INSERT INTO car_rental.clients (FirstName, LastName, Email) VALUES
 ('John', 'Smith', 'john@example.com'),
@@ -75,23 +61,7 @@ INSERT INTO car_rental.cars (Brand, Model, IDEngine, Price) VALUES
 INSERT INTO car_rental.rented_car (IDClient, IDCar, Rented_Date, Rented_From, Rented_Until) VALUES
 (1, 1, '2024-06-10', '2024-06-10', '2024-06-12'),
 (2, 2, '2024-06-11', '2024-06-11', '2024-06-15');
-Instalacja i Uruchomienie
-Klonowanie repozytorium:
-git clone https://github.com/hubertfus/car-rental-app.git
-cd car-rental-app
-Konfiguracja bazy danych:
-Utwórz bazę danych PostgreSQL i schemat car_rental zgodnie z dostarczonymi skryptami SQL.
-Zaimportuj dane z pliku schema.sql.
-Użycie
-Po uruchomieniu aplikacji użytkownik zostanie powitany przez interfejs graficzny umożliwiający zarządzanie danymi w bazie. Za pomocą menu nawigacyjnego można:
 
-Dodawać nowe rekordy do tabel
-Usuwać istniejące rekordy
-Wyświetlać dane z tabel w * przejrzystej formie
-Edytować wybrane rekordy
-Wymagania
-Java 21
-Maven
-PostgreSQL
+
 Autorzy
-Projekt został stworzony przez Huberta Fusiarza, Macieja Pintala, Dawida Skibe, Marcina Wajde i Kamilą Węża w ramach projektu na studiach.
+Bartosz Winczowski, Emilia Szczęch,Nadia Schiffer,Filip Ślemp
