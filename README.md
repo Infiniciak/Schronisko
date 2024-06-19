@@ -13,7 +13,7 @@ Czyszczenie wpisywanych pól
 # Baza danych PostgreSQL składa się z trzech tabel:
 
 zwierzaki:
-
+```
 CREATE TABLE zwierzaki (
     idzwierzaka INT PRIMARY KEY,
     rasa VARCHAR(20),
@@ -22,7 +22,7 @@ CREATE TABLE zwierzaki (
     wiek INT,
     dataprzyjecia DATE
 );
-
+```
 szczepienia
 
 CREATE TABLE szczepienia (
