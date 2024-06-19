@@ -72,7 +72,7 @@ INSERT INTO adoptujacy (imie,nazwisko,dataadopcji) VALUES
 # Autorzy
 | Osoba | Zakres obowiązków |
 | --- | --- |
-| Bartosz Winczowski | List all new or modified files |
-| Emilia Szczęch
-| Nadia Schiffer
-| Filip Ślemp
+| Bartosz Winczowski | Stworzenie konfiguracji Hibernate,mapowanie Hibernate,Klasy,Repozytoria,Kontrolery |
+| Emilia Szczęch | Stworzenie bazy danych,CRUD |
+| Nadia Schiffer | GUI |
+| Filip Ślemp | GUI |
