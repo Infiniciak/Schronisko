@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #1b3f61;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.controllers.VaccinationController">
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+            <children>
+                <Label layoutX="340.0" layoutY="175.0" prefHeight="18.0" prefWidth="207.0" text="Data ostatniego szczepienia" />
+                <Label layoutX="340.0" layoutY="70.0" prefHeight="18.0" prefWidth="70.0" text="ID zwierzaka" />
+                <Label layoutX="340.0" layoutY="140.0" text="Data pierwszego szczepienia" />
+                <Label layoutX="340.0" layoutY="105.0" text="Rodzaj szczepienia" />
+                <TextField fx:id="fieldVaccineType" layoutX="495.0" layoutY="105.0" />
+                <TextField fx:id="fieldPetID" layoutX="495.0" layoutY="70.0" />
+                <DatePicker fx:id="fieldLastVaccination" layoutX="495.0" layoutY="171.0" />
+                <TableView fx:id="table" layoutX="185.0" layoutY="400.0" prefHeight="240.0" prefWidth="688.0">
+                    <columns>
+                        <TableColumn fx:id="colPetID" prefWidth="79.20001220703125" text="ID_zwierzaka" />
+                        <TableColumn fx:id="colVaccineType" prefWidth="122.4000244140625" text="Rodzaj_szczepienia" />
+                        <TableColumn fx:id="colFirstVaccination" prefWidth="171.20001220703125" text="Data_pierwszego_szczepienia" />
+                        <TableColumn fx:id="colLastVaccination" prefWidth="173.60009765625" text="Data_ostatniego_szczepienia" />
+                  <TableColumn fx:id="colID" prefWidth="137.60003662109375" text="Id_szczepienia" />
+                    </columns>
+                </TableView>
+                <Button fx:id="buttonNew" layoutX="340.0" layoutY="292.0" mnemonicParsing="false" onAction="#addVaccinations" text="Dodaj" />
+                <Button fx:id="buttonSave" layoutX="439.0" layoutY="292.0" mnemonicParsing="false" onAction="#showVaccinations" text="Odśwież" />
+                <Button fx:id="buttonUpdate" layoutX="570.0" layoutY="292.0" mnemonicParsing="false" onAction="#updateVaccinations" text="Aktualizuj" />
+                <Button fx:id="buttonDelete" layoutX="708.0" layoutY="292.0" mnemonicParsing="false" onAction="#deleteVaccinations" text="Usuń" />
+                <Button fx:id="toAdopters" layoutX="882.0" layoutY="582.0" mnemonicParsing="false" onAction="#goToAdopters" text="Przejdź do adoptujących" />
+
+                <Label layoutX="309.0" layoutY="361.0" text="Znajdź" />
+                <TextField fx:id="fieldSearch" layoutX="370.0" layoutY="356.0" prefHeight="26.0" prefWidth="382.0" promptText="Znajdź..." />
+                <DatePicker fx:id="fieldFirstVaccination" layoutX="495.0" layoutY="140.0" />
+            <Button fx:id="toAnimals" layoutX="882.0" layoutY="556.0" mnemonicParsing="false" onAction="#goToAnimals" text="Przejdź do zwierząt" />
+            <Button fx:id="buttonClear" layoutX="790.0" layoutY="292.0" mnemonicParsing="false" onAction="#clearFields" text="Czyść" />
+            </children>
+        </AnchorPane>
+    </center>
+    <top>
+        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="102.0" style="-fx-background-color: #1b3f61;" text="SZCZEPIENIA" textFill="#fff8f8" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="Georgia Pro" size="62.0" />
+            </font>
+        </Label>
+    </top>
+</BorderPane>

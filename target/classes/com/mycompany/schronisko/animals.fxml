@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #1b3f61;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.controllers.AnimalController">
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+            <children>
+                <Label layoutX="400.0" layoutY="90.0" text="Rasa" />
+                <Label layoutX="400.0" layoutY="55.0" prefHeight="18.0" prefWidth="57.0" text="Gatunek" />
+                <Label layoutX="400.0" layoutY="125.0" text="Płeć" />
+                <Label layoutX="400.0" layoutY="160.0" text="Wiek" />
+                <Label layoutX="400.0" layoutY="195.0" text="Data" />
+                <TextField fx:id="fieldSex" layoutX="495.0" layoutY="125.0" />
+                <TextField fx:id="fieldAge" layoutX="495.0" layoutY="160.0" />
+                <TextField fx:id="fieldSpecies" layoutX="495.0" layoutY="55.0" />
+                <DatePicker fx:id="fieldDate" layoutX="495.0" layoutY="195.0" />
+                <TextField fx:id="fieldRace" layoutX="495.0" layoutY="90.0" />
+                <TableView fx:id="table" layoutX="227.0" layoutY="406.0" prefHeight="245.0" prefWidth="611.0">
+                    <columns>
+                        <TableColumn fx:id="colID" prefWidth="63.20001220703125" text="ID" />
+                        <TableColumn fx:id="colSpecies" prefWidth="110.4000244140625" text="Gatunek" />
+                        <TableColumn fx:id="colRace" prefWidth="87.20001220703125" text="Rasa" />
+                        <TableColumn fx:id="colSex" prefWidth="69.60003662109375" text="Płeć" />
+                        <TableColumn fx:id="colAge" prefWidth="74.4000244140625" text="Wiek" />
+                        <TableColumn fx:id="colDate" prefWidth="108.79998779296875" text="Data_przyjęcia" />
+                        <TableColumn fx:id="colStatus" prefWidth="93.5999755859375" text="Status" />
+                    </columns>
+                </TableView>
+                <Button fx:id="buttonNew" layoutX="309.0" layoutY="292.0" mnemonicParsing="false" onAction="#addAnimal" text="Dodaj" />
+                <Button fx:id="buttonSave" layoutX="403.0" layoutY="292.0" mnemonicParsing="false" onAction="#showAnimals" text="Odśwież" />
+                <Button fx:id="buttonUpdate" layoutX="515.0" layoutY="292.0" mnemonicParsing="false" onAction="#updateAnimal" text="Aktualizuj" />
+                <Button fx:id="buttonDelete" layoutX="644.0" layoutY="292.0" mnemonicParsing="false" onAction="#deleteAnimal" text="Usuń" />
+                <Button fx:id="buttonClear" layoutX="737.0" layoutY="292.0" mnemonicParsing="false" onAction="#clearFields" text="Czyść" />
+                <Button fx:id="toVaccination" layoutX="882.0" layoutY="582.0" mnemonicParsing="false" onAction="#goToVaccination" text="Przejdź do szczepień" />
+                <Label layoutX="309.0" layoutY="361.0" text="Znajdź" />
+                <TextField fx:id="fieldSearch" layoutX="370.0" layoutY="356.0" prefHeight="26.0" prefWidth="382.0" promptText="Znajdź..." />
+                <Label layoutX="400.0" layoutY="230.0" text="Status" />
+                <TextField fx:id="fieldStatus" layoutX="495.0" layoutY="230.0" />
+            <Button fx:id="toAdopters" layoutX="882.0" layoutY="556.0" mnemonicParsing="false" onAction="#goToAdopters" text="Przejdź do adoptujących" />
+
+            </children>
+        </AnchorPane>
+    </center>
+    <top>
+        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="102.0" style="-fx-background-color: #1b3f61;" text="ZWIERZĘTA" textFill="#fff8f8" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="Georgia Pro" size="62.0" />
+            </font>
+        </Label>
+    </top>
+</BorderPane>
