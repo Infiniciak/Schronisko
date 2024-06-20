@@ -52,5 +52,5 @@ CREATE TABLE adoptujacy(
 | --- | --- |
 | Bartosz Winczowski | Stworzenie konfiguracji Hibernate,mapowanie Hibernate,Klasy,Repozytoria,Kontrolery,Dokumentacja |
 | Emilia Szczęch | Stworzenie bazy danych,Kontrolery,Dokumentacja |
-| Nadia Schiffer | GUI,Kontrolery,Dokumentacja |
+| Nadia Schiffer | GUI |
 | Filip Ślemp | GUI,Kontrolery,Dokumentacja |
