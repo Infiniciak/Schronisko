@@ -55,6 +55,8 @@ public class Animal implements Serializable {
     @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "animal")
     private List<Vaccination> vaccination;
 
+
+
 public Animal()
 {
 
@@ -67,6 +69,7 @@ public Animal()
         this.dataprzyjecia = dataprzyjecia;
         this.status = status;
     }
+
 
     public Animal(Long id, String gatunek, String rasa, String plec, int wiek, String dataprzyjecia, String status) {
         this.id = id;

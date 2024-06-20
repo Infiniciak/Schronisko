@@ -18,7 +18,6 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@ToString
 @Table(name="szczepienia")
 public class Vaccination implements Serializable  {
     @Id
@@ -33,7 +32,7 @@ public class Vaccination implements Serializable  {
     @Column(name="id__zwierzaka")
     private int id__zwierzaka;
     @ManyToOne
-    @JoinColumn(name="id__zwierzaka",insertable = false,updatable =false, referencedColumnName = "id")
+    @JoinColumn(name="id__zwierzaka",insertable = false,updatable =false, referencedColumnName = "id",nullable=false)
     private Animal animal;
 
     public Vaccination()
@@ -45,6 +44,13 @@ public class Vaccination implements Serializable  {
         this.id=id;
         this.rodzaj_szczepienia=rodzaj_szczepienia;
         this.id__zwierzaka=id__zwierzaka;
+        this.data_pierwszego_szczepienia=data_pierwszego_szczepienia;
+        this.data_ostatniego_szczepienia=data_ostatniego_szczepienia;
+    }
+
+    public Vaccination(String rodzaj_szczepienia,String data_pierwszego_szczepienia,String data_ostatniego_szczepienia)
+    {
+        this.rodzaj_szczepienia=rodzaj_szczepienia;
         this.data_pierwszego_szczepienia=data_pierwszego_szczepienia;
         this.data_ostatniego_szczepienia=data_ostatniego_szczepienia;
     }

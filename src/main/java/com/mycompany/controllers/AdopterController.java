@@ -89,7 +89,7 @@ public class AdopterController implements Initializable {
     /**
      * Inicjowanie SessionFactory przy uzyciu HibernateUtil w celu stworzenia sesji
      * Stworzenie instancji klasy AdopterRespository
-     * Stwowrzenie listy do aktualizowania elementow interfejsu
+     * Stworzenie listy do aktualizowania elementow interfejsu
      */
     SessionFactory factory = HibernateUtil.getSessionFactory();
     AdopterRepository ar = new AdopterRepository(factory);

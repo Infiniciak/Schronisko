@@ -88,7 +88,7 @@ public class VaccinationController implements Initializable {
     /**
      * Inicjowanie SessionFactory przy uzyciu HibernateUtil w celu stworzenia sesji
      * Stworzenie instancji klasy VaccinationRespository
-     * Stwowrzenie listy do aktualizowania elementow interfejsu
+     * Stworzenie listy do aktualizowania elementow interfejsu
      */
 
     SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -133,7 +133,6 @@ public class VaccinationController implements Initializable {
 
             String[] array = {
                     fieldVaccineType.getText(),
-                    fieldPetID.getText(),
                     String.valueOf(fieldFirstVaccination.getValue()),
                     String.valueOf(fieldLastVaccination.getValue()),
             };
@@ -158,11 +157,10 @@ public class VaccinationController implements Initializable {
              */
             Vaccination newVaccination = new Vaccination(
                     fieldVaccineType.getText(),
-                    Integer.parseInt(fieldPetID.getText()),
                     String.valueOf(fieldFirstVaccination.getValue()),
                     String.valueOf(fieldLastVaccination.getValue())
             );
-            System.out.println(String.valueOf(newVaccination));
+            System.out.println(newVaccination);
 
             Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
@@ -171,10 +169,7 @@ public class VaccinationController implements Initializable {
             SessionFactory factory = cfg.buildSessionFactory(serviceRegistry);
 
             VaccinationRepository vaccinationRepository = new VaccinationRepository(factory);
-
-
             vaccinationRepository.save(newVaccination);
-
         }
 
     }
@@ -193,11 +188,11 @@ public class VaccinationController implements Initializable {
             ols.add(v);
         }
 
-        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colVaccineType.setCellValueFactory(new PropertyValueFactory<>("rodzaj_szczepienia"));
         colPetID.setCellValueFactory(new PropertyValueFactory<>("id__zwierzaka"));
+        colVaccineType.setCellValueFactory(new PropertyValueFactory<>("rodzaj_szczepienia"));
         colFirstVaccination.setCellValueFactory(new PropertyValueFactory<>("data_pierwszego_szczepienia"));
         colLastVaccination.setCellValueFactory(new PropertyValueFactory<>("data_ostatniego_szczepienia"));
+        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         table.setItems(ols);
 
         if (selectedVaccination != null) {
@@ -350,7 +345,6 @@ public class VaccinationController implements Initializable {
                 fieldFirstVaccination.setValue(LocalDate.parse(selected.getData_pierwszego_szczepienia()));
                 fieldLastVaccination.setValue(LocalDate.parse(selected.getData_ostatniego_szczepienia()));
                 fieldVaccineType.setText(selected.getRodzaj_szczepienia());
-                fieldPetID.setText(String.valueOf(selected.getId__zwierzaka()));
             }
         });
     }

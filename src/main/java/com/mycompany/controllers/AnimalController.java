@@ -93,7 +93,7 @@ public class AnimalController implements Initializable {
     /**
      * Inicjowanie SessionFactory przy uzyciu HibernateUtil w celu stworzenia sesji
      * Stworzenie instancji klasy AnimalRespository
-     * Stwowrzenie listy do aktualizowania elementow interfejsu
+     * Stworzenie listy do aktualizowania elementow interfejsu
      */
     SessionFactory factory = HibernateUtil.getSessionFactory();
     AnimalRepository ar = new AnimalRepository(factory);
