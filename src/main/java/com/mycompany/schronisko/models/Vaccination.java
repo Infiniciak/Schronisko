@@ -33,7 +33,7 @@ public class Vaccination implements Serializable  {
     @Column(name="id__zwierzaka")
     private int id__zwierzaka;
     @ManyToOne
-    @JoinColumn(name="idzwierzaka",insertable = false,updatable =false, referencedColumnName = "id")
+    @JoinColumn(name="id__zwierzaka",insertable = false,updatable =false, referencedColumnName = "id")
     private Animal animal;
 
     public Vaccination()

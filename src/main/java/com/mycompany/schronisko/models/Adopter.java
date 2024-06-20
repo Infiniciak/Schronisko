@@ -34,7 +34,7 @@ public class Adopter implements Serializable {
     private String nazwisko;
 
     @ManyToOne
-    @JoinColumn(name = "idzwierzaka",insertable = false,updatable =false,referencedColumnName = "id")
+    @JoinColumn(name = "id_zwierzaka",insertable = false,updatable =false,referencedColumnName = "id")
     private Animal animal;
 
     public Adopter()

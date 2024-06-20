@@ -125,9 +125,9 @@ public class AnimalController implements Initializable {
         dialog.setTitle("Złe dane");
         dialog.setHeaderText(str);
         dialog.initModality(Modality.APPLICATION_MODAL);
-        ButtonType przOK = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().add(przOK);
-        Optional<ButtonType> wynik = dialog.showAndWait();
+        ButtonType buttonOK = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(buttonOK);
+        Optional<ButtonType> result = dialog.showAndWait();
     }
 
     /**
@@ -153,7 +153,6 @@ public class AnimalController implements Initializable {
                     fieldAge.getText(),
                     String.valueOf(fieldDate.getValue()),
                     fieldStatus.getText(),
-
             };
             /**
              *   Sprawdzanie podanych danych
@@ -184,16 +183,14 @@ public class AnimalController implements Initializable {
                     String.valueOf(fieldDate.getValue()),
                     fieldStatus.getText()
             );
-            System.out.println( String.valueOf(newAnimal));
+            System.out.println(newAnimal);
 
             SessionFactory factory = HibernateUtil.getSessionFactory();
 
            AnimalRepository animalRepository = new AnimalRepository(factory);
             animalRepository.save(newAnimal);
             showAnimals();
-
         }
-
     }
 
     /**

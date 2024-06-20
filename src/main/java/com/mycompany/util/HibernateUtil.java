@@ -28,12 +28,12 @@ public class HibernateUtil {
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQL82Dialect");
                 settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-                settings.put(Environment.HBM2DDL_AUTO, "update");
+                settings.put(Environment.HBM2DDL_AUTO, "create");
 
                 configuration.setProperties(settings);
-                configuration.addAnnotatedClass(com.mycompany.schronisko.models.Adopter.class);
-                configuration.addAnnotatedClass(com.mycompany.schronisko.models.Animal.class);
-                configuration.addAnnotatedClass(com.mycompany.schronisko.models.Vaccination.class);
+                configuration.addAnnotatedClass(Adopter.class);
+                configuration.addAnnotatedClass(Animal.class);
+                configuration.addAnnotatedClass(Vaccination.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();

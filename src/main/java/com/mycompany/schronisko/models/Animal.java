@@ -10,7 +10,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-//package com.mycompany.schronisko.hibernate;
 
 import javax.persistence.*;
 
@@ -21,12 +20,11 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * @author Bartosz
+ *Klasa obslugujaca zwierzaki
  */
 @Entity
 @Getter
 @Setter
-@ToString
 @Table(name = "zwierzaki")
 public class Animal implements Serializable {
     @Id
