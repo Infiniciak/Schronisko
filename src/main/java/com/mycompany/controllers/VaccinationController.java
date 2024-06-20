@@ -38,30 +38,26 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 /**
- * FXML Controller class
- *
- * @author Bartosz
+ * Klasa kontrolera dla szczepien
  */
 public class VaccinationController implements Initializable {
 
+
+    /**
+     * Funkcja umozliwiajaca przejscie do menu
+     */
     @FXML
-    public void goToAnimals(ActionEvent event) throws Exception {
-        Parent root= FXMLLoader.load(getClass().getResource("/com/mycompany/schronisko/animals.fxml"));
-        Stage window=(Stage)toAnimals.getScene().getWindow();
+    public void goToMenu(ActionEvent event) throws Exception {
+        Parent root= FXMLLoader.load(getClass().getResource("/com/mycompany/schronisko/menu.fxml"));
+        Stage window=(Stage)toMenu.getScene().getWindow();
         window.setScene(new Scene(root,1024,768));
         window.setFullScreen(true);
     }
 
-    @FXML
-    public void goToAdopters(ActionEvent event) throws Exception {
-        Parent root= FXMLLoader.load(getClass().getResource("/com/mycompany/schronisko/adopters.fxml"));
-        Stage window=(Stage)toAdopters.getScene().getWindow();
-        window.setScene(new Scene(root,1024,768));
-        window.setFullScreen(true);
-    }
 
-    @FXML
-    public TextField fieldID;
+    /**
+     * Okreslenie pol danej klasy
+     */
     @FXML
     public TextField fieldVaccineType;
     @FXML
@@ -73,6 +69,10 @@ public class VaccinationController implements Initializable {
     @FXML
     public TextField fieldSearch;
 
+
+    /**
+     * Okreslenie przyciskow danej klasy
+     */
     @FXML
     public Button buttonNew;
     @FXML
@@ -82,23 +82,29 @@ public class VaccinationController implements Initializable {
     @FXML
     public Button buttonDelete;
     @FXML
-    public Button toAnimals;
-    @FXML
-    public Button toAdopters;
+    public Button toMenu;
+
+
+    /**
+     * Inicjowanie SessionFactory przy uzyciu HibernateUtil w celu stworzenia sesji
+     * Stworzenie instancji klasy VaccinationRespository
+     * Stwowrzenie listy do aktualizowania elementow interfejsu
+     */
 
     SessionFactory factory = HibernateUtil.getSessionFactory();
     VaccinationRepository vr = new VaccinationRepository(factory);
     ObservableList ols = FXCollections.observableArrayList();
 
-    @FXML
-    private void handleAddAnimalAction(ActionEvent event) {
-        System.out.println("Button clicked!");
-    }
-
+    /**
+     * Funkcja isValidString sprawdza, czy dany string nie jest null i czy nie jest pusty po przycięciu białych znaków
+     */
     public boolean isValidString(String str) {
         return str != null && !str.trim().isEmpty();
     }
 
+    /**
+     *   Funkcja ShowWarning wyświetla modalne okno dialogowe z przekazanym komunikatem ostrzegawczym i przyciskiem OK
+     */
     public void ShowWarning(String str) {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Złe dane");
@@ -108,8 +114,11 @@ public class VaccinationController implements Initializable {
         dialog.getDialogPane().getButtonTypes().add(buttonOK);
         Optional<ButtonType> result = dialog.showAndWait();
     }
-
+    /**
+     *  Funkcja addVaccinations wyświetla modalne okno dialogowe z prośbą o potwierdzenie dodania nowych szzczepien, a po uzyskaniu zgody użytkownika zbiera dane z pól tekstowych i zapisuje do tablicy
+     */
     @FXML
+
     public void addVaccinations() {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Potwierdzenie dodania");
@@ -128,17 +137,25 @@ public class VaccinationController implements Initializable {
                     String.valueOf(fieldFirstVaccination.getValue()),
                     String.valueOf(fieldLastVaccination.getValue()),
             };
-
+            /**
+             *   Sprawdzanie podanych danych
+             */
             if (fieldFirstVaccination.getValue() == null) {
                 ShowWarning("Źle podana data! ");
                 return;
             }
+            /**
+             *   Sprawdzanie podanych danych
+             */
             if (fieldLastVaccination.getValue() == null) {
                 ShowWarning("Źle podana data! ");
                 return;
             }
 
             System.out.println(Arrays.toString(array));
+            /**
+             *   Tworzenie obiektu szczepienia z podanymi danymi przez uzytkownika
+             */
             Vaccination newVaccination = new Vaccination(
                     fieldVaccineType.getText(),
                     Integer.parseInt(fieldPetID.getText()),
@@ -163,7 +180,9 @@ public class VaccinationController implements Initializable {
     }
 
 
-
+    /**
+     *   Funkcja showVaccinations pobiera listę szczepien, aktualizuje tabelę nowymi danymi oraz następnie przywraca wcześniejszy wybór w tabeli
+     */
     @FXML
     private void showVaccinations() {
         Vaccination selectedVaccination = table.getSelectionModel().getSelectedItem();
@@ -176,6 +195,7 @@ public class VaccinationController implements Initializable {
 
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colVaccineType.setCellValueFactory(new PropertyValueFactory<>("rodzaj_szczepienia"));
+        colPetID.setCellValueFactory(new PropertyValueFactory<>("id__zwierzaka"));
         colFirstVaccination.setCellValueFactory(new PropertyValueFactory<>("data_pierwszego_szczepienia"));
         colLastVaccination.setCellValueFactory(new PropertyValueFactory<>("data_ostatniego_szczepienia"));
         table.setItems(ols);
@@ -190,6 +210,9 @@ public class VaccinationController implements Initializable {
         table.getFocusModel().focus(selectedRow);
     }
 
+    /**
+     *  Stworzenie elementow dla wyswietlenia tabeli
+     */
     @FXML
     public TableView<Vaccination> table;
 
@@ -205,13 +228,18 @@ public class VaccinationController implements Initializable {
     @FXML
     public TableColumn<Vaccination,DatePicker> colLastVaccination;
     @FXML
-    public TableColumn<Vaccination,String> colPetId;
+    public TableColumn<Vaccination,String> colPetID;
 
+    /**
+     *  Stworzenie elementu do wybrania elementu
+     */
     public Vaccination selected;
 
 
-    @FXML
-    public void updateVaccinations() {
+    /**
+     * Funkcja updateVaccinations wyświetla modalne okno dialogowe z prośbą o potwierdzenie aktualizacji danych szczepien, a po uzyskaniu zgody aktualizuje dane wybrane szczepienie w bazie, po czym odświeża widok tabeli i ponownie włącza przyciski AKTUALIZUJ i USUŃ
+     */
+    @FXML public void updateVaccinations() {
         try {
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Potwierdzenie aktualizacji");
@@ -251,7 +279,9 @@ public class VaccinationController implements Initializable {
     }
 
 
-
+    /**
+     *Funkcja deleteVaccinations wyświetla modalne okno dialogowe z prośbą o potwierdzenie usunięcia szczepienia, a po uzyskaniu zgody usuwa wybrane szczepienie z bazy danych za pomocą VaccinationRepository i odświeża widok tabeli
+     */
     @FXML
     public void deleteVaccinations() {
         try {
@@ -275,6 +305,9 @@ public class VaccinationController implements Initializable {
         }
     }
 
+    /**
+     *Funkcja clearFields czyści dane podane w formularzu ustawiając je na puste ciągi znaków a date ustawia na aktualną
+     */
     @FXML
     public void clearFields() {
         fieldPetID.setText("");
@@ -283,7 +316,9 @@ public class VaccinationController implements Initializable {
         fieldLastVaccination.setValue(LocalDate.now());
     }
 
-
+    /**
+     *Funkcja filterSearch filtruje listę wszystkie szczepienia na podstawie przekazanego ciągu znaków i wyświetla tylko te szczepienia które posiadają wpisywany tekst
+     */
     public void filterSearch(String searchName) {
         List<Vaccination> allVaccinations = vr.getAll();
         ObservableList<Vaccination> filteredVaccinations = FXCollections.observableArrayList();
@@ -307,13 +342,15 @@ public class VaccinationController implements Initializable {
             filterSearch(newValue);
         });
         showVaccinations();
-        table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        /**
+         *Kod dodaje nasłuchiwacz do tabeli, który aktualizuje pola tekstowe oraz zmienna "selected" danymi wybranego wiersza, gdy użytkownik nacisinie jakis wiersz
+         */        table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 selected = table.getSelectionModel().getSelectedItem();
                 fieldFirstVaccination.setValue(LocalDate.parse(selected.getData_pierwszego_szczepienia()));
                 fieldLastVaccination.setValue(LocalDate.parse(selected.getData_ostatniego_szczepienia()));
                 fieldVaccineType.setText(selected.getRodzaj_szczepienia());
-                fieldPetID.setText(String.valueOf(selected.getIdzwierzaka()));
+                fieldPetID.setText(String.valueOf(selected.getId__zwierzaka()));
             }
         });
     }

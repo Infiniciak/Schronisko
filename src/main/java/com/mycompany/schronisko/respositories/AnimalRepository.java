@@ -10,14 +10,26 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+/**
+ * Repozytorium dla klasy Animal
+ */
 public class AnimalRepository implements AnimalRepositoryInterface {
 
+    /**
+     * Stworzenie sessionFactory dla klasy Animal
+     */
     private final SessionFactory sessionFactory;
 
+    /**
+     * Stworzenie konstruktora klasy Adopter
+     */
     public AnimalRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     * Stworzenie metody pokazujacej wszystkie dane
+     */
     @Override
     public List<Animal> getAll() {
         try (Session session = sessionFactory.openSession()) {
@@ -25,6 +37,9 @@ public class AnimalRepository implements AnimalRepositoryInterface {
         }
     }
 
+    /**
+     * Stworzenie metody szukajacej po id
+     */
     @Override
     public Animal getById(Long id) {
         try (Session session = sessionFactory.openSession()) {
@@ -32,6 +47,9 @@ public class AnimalRepository implements AnimalRepositoryInterface {
         }
     }
 
+    /**
+     * Stworzenie metody zapisujacej dane
+     */
     @Override
     public void save(Animal animal) {
         try (Session session = sessionFactory.openSession()) {
@@ -41,6 +59,9 @@ public class AnimalRepository implements AnimalRepositoryInterface {
         }
     }
 
+    /**
+     * Stworzenie metody aktualizujacej dane
+     */
     @Override
     public void update(Animal animal) {
         try (Session session = sessionFactory.openSession()) {
@@ -50,6 +71,9 @@ public class AnimalRepository implements AnimalRepositoryInterface {
         }
     }
 
+    /**
+     * Stworzenie metody usuwajacej dane
+     */
     @Override
     public void delete(Animal animal) {
         try (Session session = sessionFactory.openSession()) {

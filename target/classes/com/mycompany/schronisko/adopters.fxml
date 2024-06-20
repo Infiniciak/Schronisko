@@ -36,11 +36,10 @@
                 <Button fx:id="buttonUpdate" layoutX="515.0" layoutY="292.0" mnemonicParsing="false" onAction="#updateAdopter" text="Aktualizuj" />
                 <Button fx:id="buttonDelete" layoutX="644.0" layoutY="292.0" mnemonicParsing="false" onAction="#deleteAdopter" text="Usuń" />
                 <Button fx:id="buttonClear" layoutX="737.0" layoutY="292.0" mnemonicParsing="false" onAction="#clearFields" text="Czyść" />
-                <Button fx:id="toVaccination" layoutX="882.0" layoutY="582.0" mnemonicParsing="false" onAction="#goToVaccination" text="Przejdź do szczepień" />
+                <Button fx:id="toMenu" layoutX="14.0" layoutY="480.0" mnemonicParsing="false" onAction="#goToMenu" text="Wróć do menu" />
 
                 <Label layoutX="309.0" layoutY="361.0" text="Znajdź" />
                 <TextField fx:id="fieldSearch" layoutX="370.0" layoutY="356.0" prefHeight="26.0" prefWidth="382.0" promptText="Znajdź..." />
-            <Button fx:id="toAnimals" layoutX="882.0" layoutY="556.0" mnemonicParsing="false" onAction="#goToAnimals" text="Przejdź do zwierząt" />
             </children>
         </AnchorPane>
     </center>

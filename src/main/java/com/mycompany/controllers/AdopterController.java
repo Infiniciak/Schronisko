@@ -41,27 +41,24 @@ import org.hibernate.service.ServiceRegistry;
 
 
 /**
- * FXML Controller class
- *
- * @author Bartosz
+ * Klasa kontrolera dla adoptujacych
  */
 public class AdopterController implements Initializable {
+    /**
+     * Funkcja umozliwiajaca przejscie do menu
+     */
     @FXML
-    public void goToVaccination(ActionEvent event) throws Exception {
-        Parent root= FXMLLoader.load(getClass().getResource("/com/mycompany/schronisko/vaccinations.fxml"));
-        Stage window=(Stage)toVaccination.getScene().getWindow();
+    public void goToMenu(ActionEvent event) throws Exception {
+        Parent root= FXMLLoader.load(getClass().getResource("/com/mycompany/schronisko/menu.fxml"));
+        Stage window=(Stage)toMenu.getScene().getWindow();
         window.setScene(new Scene(root,1024,768));
         window.setFullScreen(true);
     }
 
-    @FXML
-    public void goToAnimals(ActionEvent event) throws Exception {
-        Parent root= FXMLLoader.load(getClass().getResource("/com/mycompany/schronisko/adopters.fxml"));
-        Stage window=(Stage)toAnimals.getScene().getWindow();
-        window.setScene(new Scene(root,1024,768));
-        window.setFullScreen(true);
-    }
 
+    /**
+     * Okreslenie pol danej klasy
+     */
     @FXML
     public TextField fieldName;
     @FXML
@@ -73,6 +70,9 @@ public class AdopterController implements Initializable {
     @FXML
     public TextField fieldSearch;
 
+    /**
+     * Okreslenie przyciskow danej klasy
+     */
     @FXML
     public Button buttonNew;
     @FXML
@@ -84,23 +84,29 @@ public class AdopterController implements Initializable {
     @FXML
     public Button toVaccination;
     @FXML
-    public Button toAnimals;
+    public Button toMenu;
 
-
+    /**
+     * Inicjowanie SessionFactory przy uzyciu HibernateUtil w celu stworzenia sesji
+     * Stworzenie instancji klasy AdopterRespository
+     * Stwowrzenie listy do aktualizowania elementow interfejsu
+     */
     SessionFactory factory = HibernateUtil.getSessionFactory();
     AdopterRepository ar = new AdopterRepository(factory);
     ObservableList ols = FXCollections.observableArrayList();
 
-    @FXML
-    private void handleAddAnimalAction(ActionEvent event) {
-        System.out.println("Button clicked!");
-    }
 
 
+
+    /**
+     * Funkcja isValidString sprawdza, czy dany string nie jest null i czy nie jest pusty po przycięciu białych znaków
+     */
     public boolean isValidString(String str) {
         return str != null && !str.trim().isEmpty();
     }
-
+    /**
+     *   Funkcja ShowWarning wyświetla modalne okno dialogowe z przekazanym komunikatem ostrzegawczym i przyciskiem OK
+     */
     public void ShowWarning(String str) {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Złe dane");
@@ -111,6 +117,9 @@ public class AdopterController implements Initializable {
         Optional<ButtonType> result = dialog.showAndWait();
     }
 
+    /**
+     *   Funkcja addAdopter wyświetla modalne okno dialogowe z prośbą o potwierdzenie dodania nowego adoptujacego, a po uzyskaniu zgody użytkownika zbiera dane z pól tekstowych i zapisuje do tablicy
+     */
     @FXML
     private void addAdopter() {
         Dialog<ButtonType> dialog = new Dialog<>();
@@ -130,13 +139,18 @@ public class AdopterController implements Initializable {
                     fieldPetID.getText(),
                     String.valueOf(fieldDate.getValue()),
             };
-
+            /**
+             *   Sprawdzanie podanych danych
+             */
             if (fieldDate.getValue() == null) {
                 ShowWarning("Źle podana data! ");
                 return;
             }
 
             System.out.println(Arrays.toString(array));
+            /**
+             *   Tworzenie obiektu adoptujacy z podanymi danymi przez uzytkownika
+             */
             Adopter newAdopter = new Adopter(
                     fieldName.getText(),
                     fieldSurname.getText(),
@@ -159,7 +173,9 @@ public class AdopterController implements Initializable {
         }
 
     }
-
+    /**
+     *  //Funkcja showAdopters pobiera listę adoptujących, aktualizuje tabelę nowymi danymi oraz następnie przywraca wcześniejszy wybór w tabeli
+     */
     @FXML
     private void showAdopters() {
         Adopter selectedAdopter = table.getSelectionModel().getSelectedItem();
@@ -173,7 +189,7 @@ public class AdopterController implements Initializable {
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("imie"));
         colSurname.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
-        colPetID.setCellValueFactory(new PropertyValueFactory<>("idzwierzaka"));
+        colPetID.setCellValueFactory(new PropertyValueFactory<>("id_zwierzaka"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("dataadopcji"));
         table.setItems(ols);
 
@@ -187,6 +203,9 @@ public class AdopterController implements Initializable {
         table.getFocusModel().focus(selectedRow);
     }
 
+    /**
+     *  Stworzenie elementow dla wyswietlenia tabeli
+     */
     @FXML
     public TableView<Adopter> table;
 
@@ -205,9 +224,14 @@ public class AdopterController implements Initializable {
     @FXML
     public TableColumn<Animal, DatePicker> colDate;
 
+    /**
+     *  Stworzenie elementu do wybrania elementu
+     */
     public Adopter selected;
 
-
+    /**
+     * Funkcja updateAdopter wyświetla modalne okno dialogowe z prośbą o potwierdzenie aktualizacji danych zwierzęcia, a po uzyskaniu zgody aktualizuje dane wybranego adoptującego w bazie, po czym odświeża widok tabeli i ponownie włącza przyciski AKTUALIZUJ i USUŃ
+     */
     @FXML
     public void updateAdopter() {
         try {
@@ -251,7 +275,9 @@ public class AdopterController implements Initializable {
 
 
 
-
+    /**
+     *Funkcja deleteAdopter wyświetla modalne okno dialogowe z prośbą o potwierdzenie usunięcia adoptującego, a po uzyskaniu zgody usuwa wybraną osobę z bazy danych za pomocą AdopterRepository i odświeża widok tabeli
+     */
     @FXML
     public void deleteAdopter() {
         try {
@@ -275,6 +301,9 @@ public class AdopterController implements Initializable {
         }
     }
 
+    /**
+     *Funkcja clearFields czyści dane podane w formularzu ustawiając je na puste ciągi znaków a date ustawia na aktualną
+     */
     @FXML
     public void clearFields() {
         fieldName.setText("");
@@ -283,7 +312,9 @@ public class AdopterController implements Initializable {
         fieldDate.setValue(LocalDate.now());
     }
 
-
+    /**
+     *Funkcja filterSearch filtruje listę wszystkich adoptujących na podstawie przekazanego ciągu znaków i wyświetla tylko te osoby które posiadają wpisywany tekst
+     */
     public void filterSearch(String searchName) {
         List<Adopter> allAdopters = ar.getAll();
         ObservableList<Adopter> filteredAdopters = FXCollections.observableArrayList();
@@ -308,11 +339,13 @@ public class AdopterController implements Initializable {
                 filterSearch(newValue);
             });
             showAdopters();
-            table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            /**
+             *Kod dodaje nasłuchiwacz do tabeli, który aktualizuje pola tekstowe oraz zmienna "selected" danymi wybranego wiersza, gdy użytkownik nacisinie jakis wiersz
+             */            table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                 if (newSelection != null) {
                     selected = table.getSelectionModel().getSelectedItem();
                     fieldDate.setValue(LocalDate.parse(selected.getDataadopcji()));
-                    fieldPetID.setText(String.valueOf(selected.getIdzwierzaka()));
+                    fieldPetID.setText(String.valueOf(selected.getId_zwierzaka()));
                     fieldName.setText(selected.getImie());
                     fieldSurname.setText(selected.getNazwisko());
                 }

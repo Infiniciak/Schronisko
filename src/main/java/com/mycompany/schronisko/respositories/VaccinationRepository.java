@@ -8,13 +8,22 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class VaccinationRepository implements VaccinationRepositoryInterface {
-
+    /**
+     * Stworzenie sessionFactory dla klasy Vaccination
+     */
     private final SessionFactory sessionFactory;
 
+    /**
+     * Stworzenie konstruktora klasy Vaccination
+     */
     public VaccinationRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
+
+    /**
+     * Stworzenie metody pokazujacej wszystkie dane
+     */
     @Override
     public List<Vaccination> getAll() {
         try (Session session = sessionFactory.openSession()) {
@@ -22,6 +31,9 @@ public class VaccinationRepository implements VaccinationRepositoryInterface {
         }
     }
 
+    /**
+     * Stworzenie metody szukajacej po id
+     */
     @Override
     public Vaccination getById(Long id) {
         try (Session session = sessionFactory.openSession()) {
@@ -29,6 +41,9 @@ public class VaccinationRepository implements VaccinationRepositoryInterface {
         }
     }
 
+    /**
+     * Stworzenie metody zapisujacej dane
+     */
     @Override
     public void save(Vaccination vaccination) {
         try (Session session = sessionFactory.openSession()) {
@@ -38,6 +53,9 @@ public class VaccinationRepository implements VaccinationRepositoryInterface {
         }
     }
 
+    /**
+     * Stworzenie metody aktualizujacej dane
+     */
     @Override
     public void update(Vaccination vaccination) {
         try (Session session = sessionFactory.openSession()) {
@@ -47,6 +65,9 @@ public class VaccinationRepository implements VaccinationRepositoryInterface {
         }
     }
 
+    /**
+     * Stworzenie metody usuwajacej dane
+     */
     @Override
     public void delete(Vaccination vaccination) {
         try (Session session = sessionFactory.openSession()) {

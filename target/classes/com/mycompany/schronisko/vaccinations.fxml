@@ -34,12 +34,11 @@
                 <Button fx:id="buttonSave" layoutX="439.0" layoutY="292.0" mnemonicParsing="false" onAction="#showVaccinations" text="Odśwież" />
                 <Button fx:id="buttonUpdate" layoutX="570.0" layoutY="292.0" mnemonicParsing="false" onAction="#updateVaccinations" text="Aktualizuj" />
                 <Button fx:id="buttonDelete" layoutX="708.0" layoutY="292.0" mnemonicParsing="false" onAction="#deleteVaccinations" text="Usuń" />
-                <Button fx:id="toAdopters" layoutX="882.0" layoutY="582.0" mnemonicParsing="false" onAction="#goToAdopters" text="Przejdź do adoptujących" />
+                <Button fx:id="toMenu" layoutY="216.0" mnemonicParsing="false" onAction="#goToMenu" text="Wróć do menu" />
 
                 <Label layoutX="309.0" layoutY="361.0" text="Znajdź" />
                 <TextField fx:id="fieldSearch" layoutX="370.0" layoutY="356.0" prefHeight="26.0" prefWidth="382.0" promptText="Znajdź..." />
                 <DatePicker fx:id="fieldFirstVaccination" layoutX="495.0" layoutY="140.0" />
-            <Button fx:id="toAnimals" layoutX="882.0" layoutY="556.0" mnemonicParsing="false" onAction="#goToAnimals" text="Przejdź do zwierząt" />
             <Button fx:id="buttonClear" layoutX="790.0" layoutY="292.0" mnemonicParsing="false" onAction="#clearFields" text="Czyść" />
             </children>
         </AnchorPane>

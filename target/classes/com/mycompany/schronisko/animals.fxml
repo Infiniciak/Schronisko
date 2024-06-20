@@ -40,12 +40,11 @@
                 <Button fx:id="buttonUpdate" layoutX="515.0" layoutY="292.0" mnemonicParsing="false" onAction="#updateAnimal" text="Aktualizuj" />
                 <Button fx:id="buttonDelete" layoutX="644.0" layoutY="292.0" mnemonicParsing="false" onAction="#deleteAnimal" text="Usuń" />
                 <Button fx:id="buttonClear" layoutX="737.0" layoutY="292.0" mnemonicParsing="false" onAction="#clearFields" text="Czyść" />
-                <Button fx:id="toVaccination" layoutX="882.0" layoutY="582.0" mnemonicParsing="false" onAction="#goToVaccination" text="Przejdź do szczepień" />
+                <Button fx:id="toMenu" layoutX="27.0" layoutY="173.0" mnemonicParsing="false" onAction="#goToMenu" text="Wróć do menu" />
                 <Label layoutX="309.0" layoutY="361.0" text="Znajdź" />
                 <TextField fx:id="fieldSearch" layoutX="370.0" layoutY="356.0" prefHeight="26.0" prefWidth="382.0" promptText="Znajdź..." />
                 <Label layoutX="400.0" layoutY="230.0" text="Status" />
                 <TextField fx:id="fieldStatus" layoutX="495.0" layoutY="230.0" />
-            <Button fx:id="toAdopters" layoutX="882.0" layoutY="556.0" mnemonicParsing="false" onAction="#goToAdopters" text="Przejdź do adoptujących" />
 
             </children>
         </AnchorPane>

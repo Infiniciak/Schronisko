@@ -8,7 +8,9 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@NoArgsConstructor
+/**
+ *Klasa obslugujaca adoptujacych
+ */
 @Getter
 @Setter
 @Entity
@@ -25,30 +27,35 @@ public class Adopter implements Serializable {
     @Column(name = "imie")
     private String imie;
 
-    @Column(name = "idzwierzaka")
-    private int idzwierzaka;
+    @Column(name = "id_zwierzaka")
+    private Integer id_zwierzaka;
 
     @Column(name = "nazwisko")
     private String nazwisko;
 
     @ManyToOne
-    @JoinColumn(name = "idzwierzaka", referencedColumnName = "id",insertable = false,updatable =false)
+    @JoinColumn(name = "idzwierzaka",insertable = false,updatable =false,referencedColumnName = "id")
     private Animal animal;
 
-    public Adopter(Long id,String imie,String nazwisko,String dataadopcji,int idzwierzaka)
+    public Adopter()
+    {
+
+    }
+
+    public Adopter(Long id,String imie,String nazwisko,String dataadopcji,int id_zwierzaka)
     {
         this.id=id;
         this.imie=imie;
         this.nazwisko=nazwisko;
         this.dataadopcji=dataadopcji;
-        this.idzwierzaka=idzwierzaka;
+        this.id_zwierzaka=id_zwierzaka;
     }
 
-    public Adopter(String imie,String nazwisko,String dataadopcji,int idzwierzaka)
+    public Adopter(String imie,String nazwisko,String dataadopcji,int id_zwierzaka)
     {
         this.imie=imie;
         this.nazwisko=nazwisko;
-        this.idzwierzaka=idzwierzaka;
+        this.id_zwierzaka=id_zwierzaka;
         this.dataadopcji=dataadopcji;
     }
 }

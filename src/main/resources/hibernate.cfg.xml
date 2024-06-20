@@ -55,6 +55,7 @@ Contributor(s):
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.archive.autodetection"/>
 
         <!-- Mapping files or annotated classes -->
         <mapping class="com.mycompany.schronisko.models.Adopter"/>

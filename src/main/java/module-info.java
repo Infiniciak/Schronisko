@@ -20,4 +20,5 @@ module com.mycompany.schronisko {
     requires java.naming;
     requires org.postgresql.jdbc;
     requires java.validation;
+    requires java.desktop;
 }

@@ -37,30 +37,27 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 /**
- * FXML Controller class
- *
- * @author Bartosz i Emilia
+ * Klasa kontrolera dla zwierzakow
  */
 public class AnimalController implements Initializable {
 
+    /**
+     * Funkcja umozliwiajaca przejscie do menu
+     */
     @FXML
-    public void goToVaccination(ActionEvent event) throws Exception {
-        Parent root= FXMLLoader.load(getClass().getResource("/com/mycompany/schronisko/vaccinations.fxml"));
-        Stage window=(Stage)toVaccination.getScene().getWindow();
-        window.setScene(new Scene(root,1024,768));
-        window.setFullScreen(true);
-    }
-
-    @FXML
-    public void goToAdopters(ActionEvent event) throws Exception {
-        Parent root= FXMLLoader.load(getClass().getResource("/com/mycompany/schronisko/adopters.fxml"));
-        Stage window=(Stage)toAdopters.getScene().getWindow();
+    public void goToMenu(ActionEvent event) throws Exception {
+        Parent root= FXMLLoader.load(getClass().getResource("/com/mycompany/schronisko/menu.fxml"));
+        Stage window=(Stage)toMenu.getScene().getWindow();
         window.setScene(new Scene(root,1024,768));
         window.setFullScreen(true);
     }
 
 
 
+
+    /**
+     * Okreslenie pol danej klasy
+     */
     @FXML
     public TextField fieldSpecies;
     @FXML
@@ -76,6 +73,9 @@ public class AnimalController implements Initializable {
     @FXML
     public TextField fieldSearch;
 
+    /**
+     * Okreslenie przyciskow danej klasy
+     */
     @FXML
     public Button buttonNew;
     @FXML
@@ -87,20 +87,22 @@ public class AnimalController implements Initializable {
     @FXML
     public Button buttonClear;
     @FXML
-    public Button toVaccination;
-    @FXML
-    public Button toAdopters;
+    public Button toMenu;
 
+
+    /**
+     * Inicjowanie SessionFactory przy uzyciu HibernateUtil w celu stworzenia sesji
+     * Stworzenie instancji klasy AnimalRespository
+     * Stwowrzenie listy do aktualizowania elementow interfejsu
+     */
     SessionFactory factory = HibernateUtil.getSessionFactory();
     AnimalRepository ar = new AnimalRepository(factory);
     ObservableList ols=FXCollections.observableArrayList();
 
 
-    @FXML
-    private void handleAddAnimalAction(ActionEvent event) {
-        System.out.println("Button clicked!");
-    }
-
+    /**
+     *     //Funkcja isValidAge sprawdza, czy dany Age jest powyzej zera
+     */
     public static boolean isValidAge(String age) {
         try {
             int ageInt = Integer.parseInt(age);
@@ -109,10 +111,15 @@ public class AnimalController implements Initializable {
             return false;
         }
     }
+    /**
+     * Funkcja isValidString sprawdza, czy dany string nie jest null i czy nie jest pusty po przycięciu białych znaków
+     */
     public static boolean isValidString(String str) {
         return str != null && !str.trim().isEmpty();
     }
-
+    /**
+     *   Funkcja ShowWarning wyświetla modalne okno dialogowe z przekazanym komunikatem ostrzegawczym i przyciskiem OK
+     */
     public static void ShowWarning(String str) {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Złe dane");
@@ -123,6 +130,9 @@ public class AnimalController implements Initializable {
         Optional<ButtonType> wynik = dialog.showAndWait();
     }
 
+    /**
+     *  Funkcja addAnimal wyświetla modalne okno dialogowe z prośbą o potwierdzenie dodania nowego zwierzaka, a po uzyskaniu zgody użytkownika zbiera dane z pól tekstowych i zapisuje do tablicy
+     */
     @FXML
     private void addAnimal() {
         Dialog<ButtonType> dialog = new Dialog<>();
@@ -145,11 +155,16 @@ public class AnimalController implements Initializable {
                     fieldStatus.getText(),
 
             };
-
+            /**
+             *   Sprawdzanie podanych danych
+             */
             if(!isValidAge(fieldAge.getText())){
                 ShowWarning("Źle podany wiek! " + fieldAge.getText());
                 return;
             }
+            /**
+             *   Sprawdzanie podanych danych
+             */
             if(fieldDate.getValue() == null){
                 ShowWarning("Źle podana data! ");
                 return;
@@ -157,6 +172,10 @@ public class AnimalController implements Initializable {
 
 
             System.out.println(Arrays.toString(array));
+            /**
+             *   Tworzenie obiektu zwierzak z podanymi danymi przez uzytkownika
+             */
+
             Animal newAnimal = new Animal(
                     fieldSpecies.getText(),
                     fieldRace.getText(),
@@ -177,6 +196,9 @@ public class AnimalController implements Initializable {
 
     }
 
+    /**
+     *   Funkcja showAnimals pobiera listę zwierzakow, aktualizuje tabelę nowymi danymi oraz następnie przywraca wcześniejszy wybór w tabeli
+     */
     @FXML
     public void showAnimals() {
 
@@ -208,6 +230,9 @@ public class AnimalController implements Initializable {
         table.getFocusModel().focus(selectedRow);
     }
 
+    /**
+     *  Stworzenie elementow dla wyswietlenia tabeli
+     */
     @FXML
     public TableView<Animal> table;
 
@@ -232,8 +257,14 @@ public class AnimalController implements Initializable {
     @FXML
     public TableColumn<Animal, String> colStatus;
 
+    /**
+     *  Stworzenie elementu do wybrania elementu
+     */
     public Animal selected;
 
+    /**
+     * Funkcja updateAnimal wyświetla modalne okno dialogowe z prośbą o potwierdzenie aktualizacji danych zwierzęcia, a po uzyskaniu zgody aktualizuje dane wybranego zwierzaka w bazie, po czym odświeża widok tabeli i ponownie włącza przyciski AKTUALIZUJ i USUŃ
+     */
     @FXML
     public void updateAnimal() {
         try {
@@ -278,8 +309,10 @@ public class AnimalController implements Initializable {
 
     }
 
-    @FXML
-    public void deleteAnimal() {
+    /**
+     *Funkcja deleteAnimal wyświetla modalne okno dialogowe z prośbą o potwierdzenie usunięcia zwierzaka, a po uzyskaniu zgody usuwa wybranego zwierzaka z bazy danych za pomocą AnimalRepository i odświeża widok tabeli
+     */
+    @FXML public void deleteAnimal() {
         try {
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Potwierdzenie usuniecia");
@@ -302,6 +335,9 @@ public class AnimalController implements Initializable {
 
     }
 
+    /**
+     *Funkcja clearFields czyści dane podane w formularzu ustawiając je na puste ciągi znaków a date ustawia na aktualną
+     */
     @FXML
     public void clearFields() {
         fieldSpecies.setText("");
@@ -312,6 +348,9 @@ public class AnimalController implements Initializable {
         fieldStatus.setText("");
     }
 
+    /**
+     *Funkcja filterSearch filtruje listę wszystkich zwierzakow na podstawie przekazanego ciągu znaków i wyświetla tylko te zwierzaki które posiadają wpisywany tekst
+     */
     public void filterSearch(String searchName) {
         List<Animal> allAnimals = ar.getAll();
         ObservableList<Animal> filteredAnimals = FXCollections.observableArrayList();
@@ -320,7 +359,7 @@ public class AnimalController implements Initializable {
                     animal.getRasa().toLowerCase().contains(searchName.toLowerCase()) ||
                     animal.getPlec().toLowerCase().contains(searchName.toLowerCase()) ||
                     String.valueOf(animal.getWiek()).toLowerCase().contains(searchName.toLowerCase()) ||
-                    animal.getDataprzyjecia().toLowerCase().contains(searchName.toLowerCase()) ||
+                    String.valueOf(animal.getDataprzyjecia()).toLowerCase().contains(searchName.toLowerCase()) ||
                     animal.getStatus().toLowerCase().contains(searchName.toLowerCase())) {
                 filteredAnimals.add(animal);
             }
@@ -338,6 +377,9 @@ public class AnimalController implements Initializable {
             filterSearch(newValue);
         });
         showAnimals();
+        /**
+         *Kod dodaje nasłuchiwacz do tabeli, który aktualizuje pola tekstowe oraz zmienna "selected" danymi wybranego wiersza, gdy użytkownik nacisinie jakis wiersz
+         */
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 selected = table.getSelectionModel().getSelectedItem();

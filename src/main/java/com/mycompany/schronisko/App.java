@@ -17,44 +17,66 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import java.io.IOException;
-        import java.util.List;
+import java.util.List;
 
 //import javax.validation.Configuration;
 
 /**
- * JavaFX App
+ * Aplikacja rozruchowa
+ * Klasa rozszerza aplikacja JavaFX i ustala GUI and konfiguruje Hibernate
  */
 public class App extends Application {
-
+    /**
+     *Stworzenie glownej scena aplikacji
+     */
     private static Scene scene;
 
+    /**
+    *Uruchomienie glownej sceny
+     * @param stage glowna scena dla aplikacji gdzie
+     * jej scena moze byc ustawiona
+     * @throws IOException w razie problemu ladowania
+     */
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("animals"), 1024, 768);
+        scene = new Scene(loadFXML("menu"), 1024, 768);
         stage.setTitle("Aplikacja dla schroniska");
         stage.setScene(scene);
         stage.setFullScreen(true);
         stage.show();
     }
 
+    /**
+     Ustawienie roota do glownej sceny
+     @param fxml nazwa pliku FXML
+     @throws IOException w razie problemu ladowania
+     */
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
+    /**
+     *Laduje plik FXML i zwraca jako obiekt Parent
+     *@param fxml nazwa pliku FXML do zaladowania
+     *@return zaladowany obiekt Parent
+     *@throws IOException w razie problemu zaladowania
+     */
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
+    /**
+     *glowna metoda aplikacji ladujaca FXML i Hibernate
+    * @param args argumenty wiersza polecen
+     */
     public static void main(String[] args) {
         System.out.println("works");
-        //for removing
 
-//       Połaczenie baza=new Połaczenie();
-//        baza.Polacz();
-//        System.out.println("Status połączenia: " + baza.getPolaczenie());
 
-        // Konfiguracja Hibernate
+        /**
+         *Konfiguracja hibernate
+         */
         Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(cfg.getProperties())
@@ -63,42 +85,22 @@ public class App extends Application {
         Session session = factory.openSession();
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-
-
-       launch();
-      testConnectionWithDatabase(session);
-
-
-
-
-//        session.beginTransaction();
-//
-//        // Seeder danych
-//        seedDatabase(session);
-//
-//        session.getTransaction().commit();
-//        session.close();
-//        sessionFactory.close();
-
-// ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-// configuration.getProperties()).build();
-// SessionFactory factory = configuration.buildSessionFactory(serviceRegistry);
-// Session session = factory.openSession();
-
-// }
-// }
+        launch();
+        testConnectionWithDatabase(session);
 
     }
+
+
+    /**
+     *test polaczenia z baza poprzez zapytanie SQL
+     @param session sesja Hibernate uzyta w celu wywolania komendy
+     */
     private static void testConnectionWithDatabase(Session session) {
         try {
-            // Próba wykonania zapytania SQL
+            // Proba wykonania zapytania
             session.beginTransaction();
-
-            // Proste zapytanie SQL SELECT z tabeli (zastąp "nazwa_tabeli" właściwą nazwą tabeli)
+            // Proste zapytanie SQL SELECT z tabeli
             SQLQuery query = session.createSQLQuery("SELECT * FROM zwierzaki");
-
-            // Opcjonalnie: Ustawienie maksymalnej liczby wyników (jeśli chcesz)
-            // query.setMaxResults(10);
 
             // Wykonanie zapytania i pobranie wyników
             List<Object[]> results = query.list();
@@ -122,42 +124,4 @@ public class App extends Application {
 
         }
     }
-
-    private static void seedDatabase(Session session) {
-
-        System.out.println("db seed in progress");
-
-//Zwierzak zwierzak1 = new Zwierzak("Pies", "Owczarek Niemiecki","Samiec",5,"2024-01-01","Aktywny");
-//Zwierzak zwierzak2 = new Zwierzak("Piess", "Owczarek Niemieckii","Samiec",3,"2024-01-01","Aktywny");
-//Adoptujacy adopt1 = new Adoptujacy();
-//adopt1.setImie("Jan");
-//adopt1.setNazwisko("Kowalski");
-//adopt1.setIdzwierzaka(3);
-//adopt1.setData_adopcji("2024-01-01");
-//adopt1.setZwierzak(zwierzak1);
-//
-//Adoptujacy adopt2 = new Adoptujacy();
-//adopt2.setImie("Dawid");
-//adopt2.setNazwisko("Bez");
-//adopt2.setIdzwierzaka(4);
-//adopt2.setData_adopcji("2024-01-02");
-//adopt2.setZwierzak(zwierzak2);
-
-        // Transaction transaction = session.beginTransaction();
-// session.save(zwierzak1);
-// session.save(zwierzak2);
-// session.save(adopt1);
-// session.save(adopt2);
-// transaction.commit();
-// System.out.println("Transaction Completed !");
-//
-// Session session = factory.openSession();
-//ArrayList<Zwierzak> lista = (ArrayList<Zwierzak>)
-//session.createSQLQuery("select * from ziwerzak").addEntity(Zwierzak.class).list();
-// for (Zwierzak zwierzak : lista)
-//System.out.println(zwierzak.toString());
-//session.close();
-// factory.close();
-    }
-
 }
