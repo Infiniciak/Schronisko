@@ -10,10 +10,19 @@ import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
 import java.util.Properties;
+/**
+ *okresla dostep do obiektów sesji Hibernate i SessionFactory za pośrednictwem klas,opcji i metod JPA
+ */
 
 public class HibernateUtil {
+    /**
+     *zmienna dla SessionFactory
+     */
 
     private static SessionFactory sessionFactory;
+    /**
+     *metoda pozwalajaca okreslic oczekiwane przez nas ustawienia, klasy itd.
+     */
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
@@ -44,7 +53,9 @@ public class HibernateUtil {
         }
         return sessionFactory;
     }
-
+    /**
+     *metoda zamykajaca sesje
+     */
     public static void shutdown() {
         getSessionFactory().close();
     }

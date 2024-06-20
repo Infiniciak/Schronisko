@@ -37,17 +37,24 @@ import org.hibernate.service.ServiceRegistry;
 
 import javax.swing.text.html.ImageView;
 
-
+/**
+ * Klasa kontrolera dla menu
+ */
 public class MenuController implements Initializable {
+
     /**
-     * Przyciski do przejscia do scen
+     * Przyciski do przejscia do sceny zwierzaki
      */
     @FXML
     public Button toAnimals;
-
+    /**
+     * Przyciski do przejscia do sceny szczepienia
+     */
     @FXML
     public Button toVaccination;
-
+    /**
+     * Przyciski do przejscia do sceny adoptujacy
+     */
     @FXML
     public Button toAdopters;
 
@@ -83,7 +90,9 @@ public class MenuController implements Initializable {
         window.setFullScreen(true);
     }
 
-
+    /**
+     * inicjalizacja
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

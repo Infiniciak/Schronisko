@@ -7,19 +7,13 @@ package com.mycompany.controllers;
 
 
 import com.mycompany.schronisko.models.Adopter;
-import com.mycompany.schronisko.models.Vaccination;
 import com.mycompany.schronisko.respositories.AdopterRepository;
-import com.mycompany.schronisko.respositories.AnimalRepository;
 import com.mycompany.schronisko.models.Animal;
-import com.mycompany.schronisko.respositories.VaccinationRepository;
 import com.mycompany.util.HibernateUtil;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,32 +51,54 @@ public class AdopterController implements Initializable {
 
 
     /**
-     * Okreslenie pol danej klasy
+     * Stworzenie pola dla imienia
      */
     @FXML
     public TextField fieldName;
+    /**
+     * Stworzenie pola dla nazwiska
+     */
     @FXML
     public TextField fieldSurname;
+    /**
+     * Stworzenie pola dla ID zwierzaka
+     */
     @FXML
     public TextField fieldPetID;
+    /**
+     * Stworzenie pola dla daty adopcjki
+     */
     @FXML
     public DatePicker fieldDate;
+    /**
+     * Stworzenie pola dla pola wyszukiwania
+     */
     @FXML
     public TextField fieldSearch;
 
     /**
-     * Okreslenie przyciskow danej klasy
+     * Okreslenie przycisku dodania
      */
     @FXML
     public Button buttonNew;
+    /**
+     * Okreslenie przycisku zapisu
+     */
     @FXML
     public Button buttonSave;
+    /**
+     * Okreslenie przycisku aktualizacji
+     */
     @FXML
     public Button buttonUpdate;
+    /**
+     * Okreslenie przycisku usuwania
+     */
     @FXML
     public Button buttonDelete;
-    @FXML
-    public Button toVaccination;
+    /**
+     * Okreslenie przycisku powrotu do menu
+     */
     @FXML
     public Button toMenu;
 
@@ -157,7 +173,7 @@ public class AdopterController implements Initializable {
                     String.valueOf(fieldDate.getValue()),
                     Integer.parseInt(fieldPetID.getText())
             );
-            System.out.println(String.valueOf(newAdopter));
+            System.out.println(newAdopter);
 
             Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
@@ -165,10 +181,10 @@ public class AdopterController implements Initializable {
                     .build();
             SessionFactory factory = cfg.buildSessionFactory(serviceRegistry);
 
-            AdopterRepository adopterRespository = new AdopterRepository(factory);
+            AdopterRepository adopterRepository = new AdopterRepository(factory);
 
 
-            adopterRespository.save(newAdopter);
+            adopterRepository.save(newAdopter);
 
         }
 
@@ -204,23 +220,33 @@ public class AdopterController implements Initializable {
     }
 
     /**
-     *  Stworzenie elementow dla wyswietlenia tabeli
+     *  Stworzenie elementu do wyswietlenia tabeli
      */
     @FXML
     public TableView<Adopter> table;
-
+    /**
+     *  Stworzenie kolumny dla ID
+     */
     @FXML
     public TableColumn<Adopter, Long> colID;
-
+    /**
+     *  Stworzenie kolumny dla imienia
+     */
     @FXML
     public TableColumn<Adopter, String> colName;
-
+    /**
+     *  Stworzenie kolumny dla nazwiska
+     */
     @FXML
     public TableColumn<Adopter, String> colSurname;
-
+    /**
+     *  Stworzenie kolumny dla ID zwierzaka
+     */
     @FXML
     public TableColumn<Adopter, Integer> colPetID;
-
+    /**
+     *  Stworzenie kolumny dla daty adopcji
+     */
     @FXML
     public TableColumn<Animal, DatePicker> colDate;
 
@@ -332,6 +358,9 @@ public class AdopterController implements Initializable {
     }
 
 
+    /**
+     *  inicjalizacja
+     */
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
             table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

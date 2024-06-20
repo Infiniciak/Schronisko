@@ -29,7 +29,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.hibernate.SessionFactory;
@@ -56,31 +55,55 @@ public class VaccinationController implements Initializable {
 
 
     /**
-     * Okreslenie pol danej klasy
+     * Stworzenie pola dla rodzaju szczepienia
      */
     @FXML
     public TextField fieldVaccineType;
+    /**
+     * Stworzenie pola dla daty pierwszego szczepienia
+     */
     @FXML
     public DatePicker fieldFirstVaccination;
+    /**
+     * Stworzenie pola dla daty ostatniego szczepienia
+     */
     @FXML
     public DatePicker fieldLastVaccination;
+    /**
+     * Stworzenie pola dla ID zwierzaka
+     */
     @FXML
     public TextField fieldPetID;
+    /**
+     * Stworzenie pola dla wyszukiwania
+     */
     @FXML
     public TextField fieldSearch;
 
 
     /**
-     * Okreslenie przyciskow danej klasy
+     * Okreslenie przycisku dodania
      */
     @FXML
     public Button buttonNew;
+    /**
+     * Okreslenie przycisku zapisu
+     */
     @FXML
     public Button buttonSave;
+    /**
+     * Okreslenie przycisku aktualizacji
+     */
     @FXML
     public Button buttonUpdate;
+    /**
+     * Okreslenie przycisku usuwania
+     */
     @FXML
     public Button buttonDelete;
+    /**
+     * Okreslenie przycisku powrotu do menu
+     */
     @FXML
     public Button toMenu;
 
@@ -210,18 +233,29 @@ public class VaccinationController implements Initializable {
      */
     @FXML
     public TableView<Vaccination> table;
-
+    /**
+     * Stworzenie kolumny dla ID
+     */
     @FXML
     public TableColumn<Vaccination,Long> colID;
-
+    /**
+     * Stworzenie kolumny dla rodzaju szczepienia
+     */
     @FXML
     public TableColumn<Vaccination,String> colVaccineType;
-
+    /**
+     * Stworzenie kolumny dla daty pierwszego szczepienia
+     */
     @FXML
     public TableColumn<Vaccination,DatePicker> colFirstVaccination;
-
+    /**
+     * Stworzenie kolumny dla daty ostatniego szczepienia
+     */
     @FXML
     public TableColumn<Vaccination,DatePicker> colLastVaccination;
+    /**
+     * Stworzenie kolumny dla ID zwierzaka
+     */
     @FXML
     public TableColumn<Vaccination,String> colPetID;
 
@@ -329,7 +363,9 @@ public class VaccinationController implements Initializable {
         ols.addAll(filteredVaccinations);
         table.setItems(ols);
     }
-
+    /**
+     * inicjalizacja
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

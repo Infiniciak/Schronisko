@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -46,18 +45,16 @@ public class Animal implements Serializable {
     @Column(name = "status")
     private String status;
 
-
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "animal")
     private List<Adopter> adopter;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "animal")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "animal1")
     private List<Vaccination> vaccination;
 
 
+    public Animal() {
 
-public Animal()
-{
+    }
 
-}
     public Animal(String gatunek, String rasa, String plec, int wiek, String dataprzyjecia, String status) {
         this.gatunek = gatunek;
         this.rasa = rasa;
@@ -77,4 +74,5 @@ public Animal()
         this.dataprzyjecia = dataprzyjecia;
         this.status = status;
     }
+
 }

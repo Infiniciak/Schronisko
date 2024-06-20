@@ -4,14 +4,11 @@
  */
 package com.mycompany.controllers;
 
-import com.mycompany.schronisko.App;
 import com.mycompany.schronisko.respositories.AnimalRepository;
 import com.mycompany.schronisko.models.Animal;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.*;
 
 import com.mycompany.util.HibernateUtil;
@@ -19,22 +16,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.StackPane;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
+
 
 /**
  * Klasa kontrolera dla zwierzakow
@@ -46,7 +37,7 @@ public class AnimalController implements Initializable {
      */
     @FXML
     public void goToMenu(ActionEvent event) throws Exception {
-        Parent root= FXMLLoader.load(getClass().getResource("/com/mycompany/schronisko/menu.fxml"));
+        Parent root= FXMLLoader.load(getClass().getResource("/src/main/resources/com/mycompany/schronisko/menu.fxml"));
         Stage window=(Stage)toMenu.getScene().getWindow();
         window.setScene(new Scene(root,1024,768));
         window.setFullScreen(true);
@@ -56,36 +47,69 @@ public class AnimalController implements Initializable {
 
 
     /**
-     * Okreslenie pol danej klasy
+     * Okreslenie pola dla gatunkow
      */
     @FXML
     public TextField fieldSpecies;
+    /**
+     * Okreslenie pola dla rasy
+     */
     @FXML
     public TextField fieldRace;
+    /**
+     * Okreslenie pola dla plci
+     */
     @FXML
     public TextField fieldSex;
+    /**
+     * Okreslenie pola dla wieku
+     */
     @FXML
     public TextField fieldAge;
+    /**
+     * Okreslenie pola dla daty
+     */
     @FXML
     public DatePicker fieldDate;
+    /**
+     * Okreslenie pola dla statusu
+     */
     @FXML
     public TextField fieldStatus;
+    /**
+     * Okreslenie pola dla wyszukiwania
+     */
     @FXML
     public TextField fieldSearch;
 
     /**
-     * Okreslenie przyciskow danej klasy
+     * Okreslenie przycisku dodania
      */
     @FXML
     public Button buttonNew;
+    /**
+     * Okreslenie przycisku zapisu
+     */
     @FXML
     public Button buttonSave;
+    /**
+     * Okreslenie przycisku aktualizacji
+     */
     @FXML
     public Button buttonUpdate;
+    /**
+     * Okreslenie przycisku usuwania
+     */
     @FXML
     public Button buttonDelete;
+    /**
+     * Okreslenie przycisku czyszczenia
+     */
     @FXML
     public Button buttonClear;
+    /**
+     * Okreslenie przycisku powrotu do menu
+     */
     @FXML
     public Button toMenu;
 
@@ -115,6 +139,7 @@ public class AnimalController implements Initializable {
      * Funkcja isValidString sprawdza, czy dany string nie jest null i czy nie jest pusty po przycięciu białych znaków
      */
     public static boolean isValidString(String str) {
+
         return str != null && !str.trim().isEmpty();
     }
     /**
@@ -228,29 +253,43 @@ public class AnimalController implements Initializable {
     }
 
     /**
-     *  Stworzenie elementow dla wyswietlenia tabeli
+     *  Stworzenie elementu do wyswietlenia tabeli
      */
     @FXML
     public TableView<Animal> table;
-
+    /**
+     *  Stworzenie kolumny dla ID
+     */
     @FXML
     public TableColumn<Animal, Long> colID;
-
+    /**
+     *  Stworzenie kolumny dla gatunku
+     */
     @FXML
     public TableColumn<Animal, String> colSpecies;
-
+    /**
+     *  Stworzenie kolumny dla rasy
+     */
     @FXML
     public TableColumn<Animal, String> colRace;
-
+    /**
+     *  Stworzenie kolumny dla plci
+     */
     @FXML
     public TableColumn<Animal, String> colSex;
-
+    /**
+     *  Stworzenie kolumny dla wieku
+     */
     @FXML
     public TableColumn<Animal, Integer> colAge;
-
+    /**
+     *  Stworzenie kolumny dla daty
+     */
     @FXML
     public TableColumn<Animal, DatePicker> colDate;
-
+    /**
+     *  Stworzenie kolumny dla statusu
+     */
     @FXML
     public TableColumn<Animal, String> colStatus;
 
@@ -366,7 +405,9 @@ public class AnimalController implements Initializable {
         ols.addAll(filteredAnimals);
         table.setItems(ols);
     }
-
+    /**
+     *  inicjalizacja
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

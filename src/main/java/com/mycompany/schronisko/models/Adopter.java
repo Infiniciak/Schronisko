@@ -8,8 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 
- /// Klasa obslugujaca adoptujacych
-
 @Getter
 @Setter
 @Entity
@@ -25,15 +23,14 @@ public class Adopter implements Serializable {
 
     @Column(name = "imie")
     private String imie;
-
-    @Column(name = "id_zwierzaka")
-    private Integer id_zwierzaka;
+@Column(name="id_zwierzaka")
+    private int id_zwierzaka;
 
     @Column(name = "nazwisko")
     private String nazwisko;
 
     @ManyToOne
-    @JoinColumn(name = "id_zwierzaka",insertable = false,updatable =false)
+    @JoinColumn(name = "id_zwierzaka",insertable = false, updatable = false)
     private Animal animal;
 
     public Adopter()
@@ -52,12 +49,10 @@ public class Adopter implements Serializable {
 
     public Adopter(String imie,String nazwisko,String dataadopcji,int id_zwierzaka)
     {
-        this.id=id;
         this.imie=imie;
         this.nazwisko=nazwisko;
         this.id_zwierzaka=id_zwierzaka;
         this.dataadopcji=dataadopcji;
     }
-
 
 }

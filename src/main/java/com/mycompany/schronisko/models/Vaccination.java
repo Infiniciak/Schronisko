@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.mycompany.schronisko.models;
 
 import lombok.Getter;
@@ -28,11 +25,11 @@ public class Vaccination implements Serializable  {
     private String data_pierwszego_szczepienia;
     @Column(name="data_ostatniego_szczepienia")
     private String data_ostatniego_szczepienia;
-    @Column(name="id__zwierzaka")
+@Column(name="id__zwierzaka")
     private int id__zwierzaka;
     @ManyToOne
-    @JoinColumn(name="id__zwierzaka",insertable = false,updatable =false,nullable=false)
-    private Animal animal;
+    @JoinColumn(name="id__zwierzaka",insertable = false, updatable = false)
+    private Animal animal1;
 
     public Vaccination()
     {
@@ -49,9 +46,7 @@ public class Vaccination implements Serializable  {
 
     public Vaccination(String rodzaj_szczepienia,String data_pierwszego_szczepienia,String data_ostatniego_szczepienia)
     {
-        this.id=id;
         this.rodzaj_szczepienia=rodzaj_szczepienia;
-        this.id__zwierzaka=id__zwierzaka;
         this.data_pierwszego_szczepienia=data_pierwszego_szczepienia;
         this.data_ostatniego_szczepienia=data_ostatniego_szczepienia;
     }
