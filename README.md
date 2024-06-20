@@ -20,7 +20,7 @@ CREATE TABLE zwierzaki (
     gatunek VARCHAR(20),
     plec VARCHAR(20),
     wiek INT,
-    dataprzyjecia DATE
+    dataprzyjecia VARCHAR(20)
 );
 ```
 szczepienia
