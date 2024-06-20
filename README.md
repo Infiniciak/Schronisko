@@ -20,6 +20,7 @@ CREATE TABLE zwierzaki (
     gatunek VARCHAR(20),
     plec VARCHAR(20),
     wiek INT,
+    status VARCHAR(20),
     dataprzyjecia VARCHAR(20)
 );
 ```
