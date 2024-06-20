@@ -20,6 +20,7 @@ CREATE TABLE zwierzaki (
     gatunek VARCHAR(20),
     plec VARCHAR(20),
     wiek INT,
+    status VARCHAR(20),
     dataprzyjecia VARCHAR(20)
 );
 ```
@@ -30,7 +31,7 @@ CREATE TABLE szczepienia (
     rodzaj_szczepienia VARCHAR(20),
     data_pierwszego_szczepienia DATE,
     data_ostatniego_szczepienia DATE,
-    idzwierzaka INT,
+    id__zwierzaka INT,
     FOREIGN KEY (idzwierzaka) REFERENCES zwierzaki(idzwierzaka)
 );
 ```
@@ -40,7 +41,7 @@ CREATE TABLE adoptujacy(
     idosoby INT PRIMARY KEY,
     imie VARCHAR(20),
     nazwisko VARCHAR(20),
-    idzwierzaka INT,
+    id_zwierzaka INT,
     dataadopcji DATE,
     FOREIGN KEY (idzwierzaka) REFERENCES zwierzaki(idzwierzaka)
 );
