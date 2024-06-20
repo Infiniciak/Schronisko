@@ -178,10 +178,12 @@ public class VaccinationController implements Initializable {
             /**
              *   Tworzenie obiektu szczepienia z podanymi danymi przez uzytkownika
              */
+            AnimalRepository animalRepository = new AnimalRepository(factory);
             Vaccination newVaccination = new Vaccination(
-                    fieldVaccineType.getText(),
+                    animalRepository.getById(Long.parseLong(fieldPetID.getText())).getId(),
                     String.valueOf(fieldFirstVaccination.getValue()),
-                    String.valueOf(fieldLastVaccination.getValue())
+                    String.valueOf(fieldLastVaccination.getValue()),
+                    fieldVaccineType.getText()
             );
             System.out.println(newVaccination);
 
@@ -211,11 +213,10 @@ public class VaccinationController implements Initializable {
             ols.add(v);
         }
 
-        colPetID.setCellValueFactory(new PropertyValueFactory<>("id__zwierzaka"));
         colVaccineType.setCellValueFactory(new PropertyValueFactory<>("rodzaj_szczepienia"));
         colFirstVaccination.setCellValueFactory(new PropertyValueFactory<>("data_pierwszego_szczepienia"));
         colLastVaccination.setCellValueFactory(new PropertyValueFactory<>("data_ostatniego_szczepienia"));
-        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colPetID.setCellValueFactory(new PropertyValueFactory<>("id__zwierzaka"));
         table.setItems(ols);
 
         if (selectedVaccination != null) {
@@ -289,9 +290,9 @@ public class VaccinationController implements Initializable {
                             Vaccination newVaccination = new Vaccination(
                                     (Long) selected.getId(),
                                     fieldVaccineType.getText(),
-                                    Integer.parseInt(fieldPetID.getText()),
                                     String.valueOf(fieldFirstVaccination.getValue()),
-                                    String.valueOf(fieldLastVaccination.getValue()));
+                                    String.valueOf(fieldLastVaccination.getValue())
+                            );
                             vaccinationRepository.update(newVaccination);
                         }
 

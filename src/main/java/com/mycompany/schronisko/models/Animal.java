@@ -25,6 +25,7 @@ import lombok.Setter;
 public class Animal implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
 
     @Column(name = "gatunek")
@@ -47,7 +48,7 @@ public class Animal implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "animal")
     private List<Adopter> adopter;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "animal1")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "animal")
     private List<Vaccination> vaccination;
 
 

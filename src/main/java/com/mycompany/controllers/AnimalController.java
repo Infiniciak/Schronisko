@@ -37,7 +37,7 @@ public class AnimalController implements Initializable {
      */
     @FXML
     public void goToMenu(ActionEvent event) throws Exception {
-        Parent root= FXMLLoader.load(getClass().getResource("/src/main/resources/com/mycompany/schronisko/menu.fxml"));
+        Parent root= FXMLLoader.load(getClass().getResource("/com/mycompany/schronisko/menu.fxml"));
         Stage window=(Stage)toMenu.getScene().getWindow();
         window.setScene(new Scene(root,1024,768));
         window.setFullScreen(true);

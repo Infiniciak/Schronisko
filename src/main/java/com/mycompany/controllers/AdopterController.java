@@ -9,6 +9,7 @@ package com.mycompany.controllers;
 import com.mycompany.schronisko.models.Adopter;
 import com.mycompany.schronisko.respositories.AdopterRepository;
 import com.mycompany.schronisko.models.Animal;
+import com.mycompany.schronisko.respositories.AnimalRepository;
 import com.mycompany.util.HibernateUtil;
 
 import java.net.URL;
@@ -32,6 +33,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+
 
 
 /**
@@ -167,11 +169,12 @@ public class AdopterController implements Initializable {
             /**
              *   Tworzenie obiektu adoptujacy z podanymi danymi przez uzytkownika
              */
+            AnimalRepository animalRepository = new AnimalRepository(factory);
             Adopter newAdopter = new Adopter(
-                    fieldName.getText(),
+                    animalRepository.getById(Long.parseLong(fieldPetID.getText())).getId(),
                     fieldSurname.getText(),
                     String.valueOf(fieldDate.getValue()),
-                    Integer.parseInt(fieldPetID.getText())
+                    fieldName.getText()
             );
             System.out.println(newAdopter);
 
@@ -202,10 +205,9 @@ public class AdopterController implements Initializable {
             ols.add(a);
         }
 
-        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colPetID.setCellValueFactory(new PropertyValueFactory<>("id_zwierzaka"));
         colName.setCellValueFactory(new PropertyValueFactory<>("imie"));
         colSurname.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
-        colPetID.setCellValueFactory(new PropertyValueFactory<>("id_zwierzaka"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("dataadopcji"));
         table.setItems(ols);
 
@@ -228,7 +230,7 @@ public class AdopterController implements Initializable {
      *  Stworzenie kolumny dla ID
      */
     @FXML
-    public TableColumn<Adopter, Long> colID;
+    public TableColumn<Adopter, Integer> colID;
     /**
      *  Stworzenie kolumny dla imienia
      */
@@ -243,7 +245,7 @@ public class AdopterController implements Initializable {
      *  Stworzenie kolumny dla ID zwierzaka
      */
     @FXML
-    public TableColumn<Adopter, Integer> colPetID;
+    public TableColumn<Adopter, Long> colPetID;
     /**
      *  Stworzenie kolumny dla daty adopcji
      */
@@ -281,8 +283,9 @@ public class AdopterController implements Initializable {
                                     (Long) selected.getId(),
                                     fieldName.getText(),
                                     fieldSurname.getText(),
-                                    String.valueOf(fieldDate.getValue()),
-                                    Integer.parseInt(fieldPetID.getText()));
+                                    String.valueOf(fieldDate.getValue())
+                            );
+
                             adopterRepository.update(newAdopter);
                         }
 
@@ -374,7 +377,6 @@ public class AdopterController implements Initializable {
                 if (newSelection != null) {
                     selected = table.getSelectionModel().getSelectedItem();
                     fieldDate.setValue(LocalDate.parse(selected.getDataadopcji()));
-                    fieldPetID.setText(String.valueOf(selected.getId_zwierzaka()));
                     fieldName.setText(selected.getImie());
                     fieldSurname.setText(selected.getNazwisko());
                 }

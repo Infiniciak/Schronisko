@@ -3,6 +3,7 @@ package com.mycompany.schronisko.models;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 
 import java.io.Serializable;
@@ -14,10 +15,12 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@ToString
 @Table(name="szczepienia")
 public class Vaccination implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
     @Column(name="rodzaj_szczepienia")
     private String rodzaj_szczepienia;
@@ -25,21 +28,19 @@ public class Vaccination implements Serializable  {
     private String data_pierwszego_szczepienia;
     @Column(name="data_ostatniego_szczepienia")
     private String data_ostatniego_szczepienia;
-@Column(name="id__zwierzaka")
-    private int id__zwierzaka;
+
     @ManyToOne
-    @JoinColumn(name="id__zwierzaka",insertable = false, updatable = false)
-    private Animal animal1;
+    @JoinColumn(name="id__zwierzaka")
+    private Animal animal;
 
     public Vaccination()
     {
 
     }
-    public Vaccination(Long id,String rodzaj_szczepienia,int id__zwierzaka,String data_pierwszego_szczepienia,String data_ostatniego_szczepienia)
+    public Vaccination(Long id,String rodzaj_szczepienia,String data_pierwszego_szczepienia,String data_ostatniego_szczepienia)
     {
         this.id=id;
         this.rodzaj_szczepienia=rodzaj_szczepienia;
-        this.id__zwierzaka=id__zwierzaka;
         this.data_pierwszego_szczepienia=data_pierwszego_szczepienia;
         this.data_ostatniego_szczepienia=data_ostatniego_szczepienia;
     }
@@ -50,6 +51,7 @@ public class Vaccination implements Serializable  {
         this.data_pierwszego_szczepienia=data_pierwszego_szczepienia;
         this.data_ostatniego_szczepienia=data_ostatniego_szczepienia;
     }
+
 
 
 }

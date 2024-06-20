@@ -16,6 +16,7 @@ import java.io.Serializable;
 public class Adopter implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
 
     @Column(name = "dataadopcji")
@@ -23,14 +24,12 @@ public class Adopter implements Serializable {
 
     @Column(name = "imie")
     private String imie;
-@Column(name="id_zwierzaka")
-    private int id_zwierzaka;
 
     @Column(name = "nazwisko")
     private String nazwisko;
 
     @ManyToOne
-    @JoinColumn(name = "id_zwierzaka",insertable = false, updatable = false)
+    @JoinColumn(name="id_zwierzaka")
     private Animal animal;
 
     public Adopter()
@@ -38,20 +37,18 @@ public class Adopter implements Serializable {
 
     }
 
-    public Adopter(Long id,String imie,String nazwisko,String dataadopcji,int id_zwierzaka)
+    public Adopter(Long id,String imie,String nazwisko,String dataadopcji)
     {
         this.id=id;
         this.imie=imie;
         this.nazwisko=nazwisko;
         this.dataadopcji=dataadopcji;
-        this.id_zwierzaka=id_zwierzaka;
     }
 
-    public Adopter(String imie,String nazwisko,String dataadopcji,int id_zwierzaka)
+    public Adopter(String imie,String nazwisko,String dataadopcji)
     {
         this.imie=imie;
         this.nazwisko=nazwisko;
-        this.id_zwierzaka=id_zwierzaka;
         this.dataadopcji=dataadopcji;
     }
 
