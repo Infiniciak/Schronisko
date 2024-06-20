@@ -5,19 +5,16 @@
 package com.mycompany.schronisko.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
+
 
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
+
 
 /**
  *Klasa obslugujaca zwierzaki
@@ -50,9 +47,9 @@ public class Animal implements Serializable {
     private String status;
 
 
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "animal")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "animal")
     private List<Adopter> adopter;
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "animal")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "animal")
     private List<Vaccination> vaccination;
 
 

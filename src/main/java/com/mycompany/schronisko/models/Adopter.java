@@ -1,7 +1,6 @@
 package com.mycompany.schronisko.models;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -34,7 +33,7 @@ public class Adopter implements Serializable {
     private String nazwisko;
 
     @ManyToOne
-    @JoinColumn(name = "id_zwierzaka",insertable = false,updatable =false,referencedColumnName = "id")
+    @JoinColumn(name = "id_zwierzaka",insertable = false,updatable =false)
     private Animal animal;
 
     public Adopter()
@@ -53,9 +52,12 @@ public class Adopter implements Serializable {
 
     public Adopter(String imie,String nazwisko,String dataadopcji,int id_zwierzaka)
     {
+        this.id=id;
         this.imie=imie;
         this.nazwisko=nazwisko;
         this.id_zwierzaka=id_zwierzaka;
         this.dataadopcji=dataadopcji;
     }
+
+
 }

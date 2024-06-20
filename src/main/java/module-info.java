@@ -12,9 +12,7 @@ module com.mycompany.schronisko {
     exports com.mycompany.schronisko.models;
     exports com.mycompany.controllers;
     opens com.mycompany.controllers to javafx.fxml,org.hibernate.orm.core;
-    // Dodaj wymagany moduł Hibernate
     requires org.hibernate.orm.core;
-//    requires hibernate.jpa;
     requires java.persistence;
     requires static lombok;
     requires java.naming;
