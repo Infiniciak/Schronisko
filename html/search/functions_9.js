@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['vaccination_0',['Vaccination',['../classcom_1_1mycompany_1_1schronisko_1_1models_1_1_vaccination.html#ab885d7eef3e24cc6864bac85fc34c0fd',1,'com.mycompany.schronisko.models.Vaccination.Vaccination()'],['../classcom_1_1mycompany_1_1schronisko_1_1models_1_1_vaccination.html#a165d12d15224dbe2cb1a828884c332a7',1,'com.mycompany.schronisko.models.Vaccination.Vaccination(Long id, String rodzaj_szczepienia, String data_pierwszego_szczepienia, String data_ostatniego_szczepienia)'],['../classcom_1_1mycompany_1_1schronisko_1_1models_1_1_vaccination.html#a2db358b23207c9530a2ce6e919a368a3',1,'com.mycompany.schronisko.models.Vaccination.Vaccination(String rodzaj_szczepienia, String data_pierwszego_szczepienia, String data_ostatniego_szczepienia)']]],
+  ['vaccinationrepository_1',['VaccinationRepository',['../classcom_1_1mycompany_1_1schronisko_1_1respositories_1_1_vaccination_repository.html#a029070d338359272985176c059244f8a',1,'com::mycompany::schronisko::respositories::VaccinationRepository']]]
+];
