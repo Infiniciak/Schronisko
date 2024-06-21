@@ -1,9 +1,7 @@
 
 package com.mycompany.schronisko.models;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 
 import java.io.Serializable;
@@ -13,6 +11,8 @@ import javax.persistence.*;
  *Klasa obslugujaca szczepienia
  */
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Table(name="szczepienia",schema="public")
@@ -28,14 +28,12 @@ public class Vaccination implements Serializable  {
     @Column(name="data_ostatniego_szczepienia")
     private String data_ostatniego_szczepienia;
 
+
     @ManyToOne
     @JoinColumn(name="id__zwierzaka")
     private Animal animal;
 
-    public Vaccination()
-    {
 
-    }
     public Vaccination(Long id,String rodzaj_szczepienia,String data_pierwszego_szczepienia,String data_ostatniego_szczepienia)
     {
         this.id=id;
@@ -50,7 +48,6 @@ public class Vaccination implements Serializable  {
         this.data_pierwszego_szczepienia=data_pierwszego_szczepienia;
         this.data_ostatniego_szczepienia=data_ostatniego_szczepienia;
     }
-
 
 
 }

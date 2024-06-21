@@ -23,11 +23,11 @@
                 <DatePicker fx:id="fieldLastVaccination" layoutX="495.0" layoutY="171.0" />
                 <TableView fx:id="table" layoutX="185.0" layoutY="400.0" prefHeight="240.0" prefWidth="688.0">
                     <columns>
-                        <TableColumn fx:id="colPetID" prefWidth="79.20001220703125" text="ID_zwierzaka" />
+                        <TableColumn fx:id="colID" prefWidth="79.20001220703125" text="ID_szczepienia" />
                         <TableColumn fx:id="colVaccineType" prefWidth="122.4000244140625" text="Rodzaj_szczepienia" />
                         <TableColumn fx:id="colFirstVaccination" prefWidth="171.20001220703125" text="Data_pierwszego_szczepienia" />
                         <TableColumn fx:id="colLastVaccination" prefWidth="173.60009765625" text="Data_ostatniego_szczepienia" />
-                  <TableColumn fx:id="colID" prefWidth="137.60003662109375" text="Id_szczepienia" />
+                  <TableColumn fx:id="colPetID" prefWidth="137.60003662109375" text="Id_zwierzaka" />
                     </columns>
                 </TableView>
                 <Button fx:id="buttonNew" layoutX="340.0" layoutY="292.0" mnemonicParsing="false" onAction="#addVaccinations" text="Dodaj" />

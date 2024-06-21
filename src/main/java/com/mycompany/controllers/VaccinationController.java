@@ -19,6 +19,8 @@ import java.util.*;
 
 import com.mycompany.schronisko.respositories.VaccinationRepository;
 import com.mycompany.util.HibernateUtil;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -153,12 +155,12 @@ public class VaccinationController implements Initializable {
         Optional<ButtonType> result = dialog.showAndWait();
         if (result.isPresent() && result.get() == buttonOK) {
             System.out.println("add vaccination");
-
+            AnimalRepository animalRepository = new AnimalRepository(factory);
             String[] array = {
-                    fieldPetID.getText(),
+                    String.valueOf(animalRepository.getById(Long.parseLong(fieldPetID.getText())).getId()),
                     fieldVaccineType.getText(),
                     String.valueOf(fieldFirstVaccination.getValue()),
-                    String.valueOf(fieldLastVaccination.getValue()),
+                    String.valueOf(fieldLastVaccination.getValue())
             };
             /**
              *   Sprawdzanie podanych danych
@@ -179,12 +181,11 @@ public class VaccinationController implements Initializable {
             /**
              *   Tworzenie obiektu szczepienia z podanymi danymi przez uzytkownika
              */
-            AnimalRepository animalRepository = new AnimalRepository(factory);
             Vaccination newVaccination = new Vaccination(
                     animalRepository.getById(Long.parseLong(fieldPetID.getText())).getId(),
+                    fieldVaccineType.getText(),
                     String.valueOf(fieldFirstVaccination.getValue()),
-                    String.valueOf(fieldLastVaccination.getValue()),
-                    fieldVaccineType.getText()
+                    String.valueOf(fieldLastVaccination.getValue())
             );
             System.out.println(newVaccination);
 
@@ -201,17 +202,25 @@ public class VaccinationController implements Initializable {
     @FXML
     private void showVaccinations() {
         Vaccination selectedVaccination = table.getSelectionModel().getSelectedItem();
-
         List<Vaccination> lv = vr.getAll();
         ols.clear();
         for (Vaccination v : lv) {
             ols.add(v);
         }
 
+        AnimalRepository animalRepository = new AnimalRepository(factory);
+        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colVaccineType.setCellValueFactory(new PropertyValueFactory<>("rodzaj_szczepienia"));
         colFirstVaccination.setCellValueFactory(new PropertyValueFactory<>("data_pierwszego_szczepienia"));
         colLastVaccination.setCellValueFactory(new PropertyValueFactory<>("data_ostatniego_szczepienia"));
-        colPetID.setCellValueFactory(new PropertyValueFactory<>("id__zwierzaka"));
+        if (fieldPetID.getText().isEmpty()) {
+            // Handle the case where the input string is empty
+        } else {
+            Long petId = animalRepository.getById(Long.parseLong(fieldPetID.getText())).getId();
+            colPetID.setCellValueFactory(cellData -> new SimpleObjectProperty<Long>(petId));
+        }
+
+
         table.setItems(ols);
 
         if (selectedVaccination != null) {
@@ -253,7 +262,7 @@ public class VaccinationController implements Initializable {
      * Stworzenie kolumny dla ID zwierzaka
      */
     @FXML
-    public TableColumn<Vaccination,String> colPetID;
+    public TableColumn<Vaccination,Long> colPetID;
 
     /**
      *  Stworzenie elementu do wybrania elementu
