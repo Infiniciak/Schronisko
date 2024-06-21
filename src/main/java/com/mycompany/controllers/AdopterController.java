@@ -300,10 +300,6 @@ public class AdopterController implements Initializable {
                 e.printStackTrace();
             }
         }
-
-
-
-
     /**
      *Funkcja deleteAdopter wyświetla modalne okno dialogowe z prośbą o potwierdzenie usunięcia adoptującego, a po uzyskaniu zgody usuwa wybraną osobę z bazy danych za pomocą AdopterRepository i odświeża widok tabeli
      */
@@ -340,7 +336,6 @@ public class AdopterController implements Initializable {
         fieldPetID.setText("");
         fieldDate.setValue(LocalDate.now());
     }
-
     /**
      *Funkcja filterSearch filtruje listę wszystkich adoptujących na podstawie przekazanego ciągu znaków i wyświetla tylko te osoby które posiadają wpisywany tekst
      */
@@ -354,7 +349,6 @@ public class AdopterController implements Initializable {
                 filteredAdopters.add(adopter);
             }
         }
-
         ols.clear();
         ols.addAll(filteredAdopters);
         table.setItems(ols);
@@ -381,8 +375,6 @@ public class AdopterController implements Initializable {
                     fieldSurname.setText(selected.getNazwisko());
                 }
             });
-
-
         }
     }
         

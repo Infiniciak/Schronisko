@@ -155,6 +155,7 @@ public class VaccinationController implements Initializable {
             System.out.println("add vaccination");
 
             String[] array = {
+                    fieldPetID.getText(),
                     fieldVaccineType.getText(),
                     String.valueOf(fieldFirstVaccination.getValue()),
                     String.valueOf(fieldLastVaccination.getValue()),

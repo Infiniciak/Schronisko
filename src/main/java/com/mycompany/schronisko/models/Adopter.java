@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Setter
 @Entity
 @ToString
-@Table(name = "adoptujacy")
+@Table(name = "adoptujacy",schema="public")
 public class Adopter implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

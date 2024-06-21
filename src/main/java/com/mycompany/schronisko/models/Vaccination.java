@@ -15,8 +15,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@ToString
-@Table(name="szczepienia")
+@Table(name="szczepienia",schema="public")
 public class Vaccination implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
