@@ -7,7 +7,9 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.io.Serializable;
 
-
+/**
+ *Klasa obslugujaca adoptujacych
+ */
 @Getter
 @Setter
 @Entity

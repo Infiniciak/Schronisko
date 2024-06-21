@@ -7,6 +7,9 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * Repozytorium dla klasy szczepienia
+ */
 public class VaccinationRepository implements VaccinationRepositoryInterface {
     /**
      * Stworzenie sessionFactory dla klasy Vaccination
