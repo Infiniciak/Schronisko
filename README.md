@@ -51,7 +51,7 @@ CREATE TABLE adoptujacy(
 # Autorzy
 | Osoba | Zakres obowiązków |
 | --- | --- |
-| Bartosz Winczowski | Stworzenie konfiguracji Hibernate,mapowanie Hibernate,Klasy,Repozytoria,Kontrolery,Dokumentacja |
+| Bartosz Winczowski | Stworzenie konfiguracji Hibernate,mapowanie Hibernate,Klasy,Kontrolery,Dokumentacja |
 | Emilia Szczęch | Stworzenie bazy danych,Kontrolery,Dokumentacja |
-| Nadia Schiffer | GUI |
+| Nadia Schiffer | GUI,Repozytoria |
 | Filip Ślemp | GUI,Kontrolery,Dokumentacja |
