@@ -188,12 +188,6 @@ public class VaccinationController implements Initializable {
             );
             System.out.println(newVaccination);
 
-            Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
-            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                    .applySettings(cfg.getProperties())
-                    .build();
-            SessionFactory factory = cfg.buildSessionFactory(serviceRegistry);
-
             VaccinationRepository vaccinationRepository = new VaccinationRepository(factory);
             vaccinationRepository.save(newVaccination);
         }

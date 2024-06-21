@@ -150,11 +150,11 @@ public class AdopterController implements Initializable {
         Optional<ButtonType> result = dialog.showAndWait();
         if (result.isPresent() && result.get() == buttonOK) {
             System.out.println("add adopter");
-
+            AnimalRepository animalRepository = new AnimalRepository(factory);
             String[] array = {
+                    String.valueOf(animalRepository.getById(Long.parseLong(fieldPetID.getText())).getId()),
                     fieldName.getText(),
                     fieldSurname.getText(),
-                    fieldPetID.getText(),
                     String.valueOf(fieldDate.getValue()),
             };
             /**
@@ -169,7 +169,7 @@ public class AdopterController implements Initializable {
             /**
              *   Tworzenie obiektu adoptujacy z podanymi danymi przez uzytkownika
              */
-            AnimalRepository animalRepository = new AnimalRepository(factory);
+
             Adopter newAdopter = new Adopter(
                     animalRepository.getById(Long.parseLong(fieldPetID.getText())).getId(),
                     fieldSurname.getText(),
@@ -177,12 +177,6 @@ public class AdopterController implements Initializable {
                     fieldName.getText()
             );
             System.out.println(newAdopter);
-
-            Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
-            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                    .applySettings(cfg.getProperties())
-                    .build();
-            SessionFactory factory = cfg.buildSessionFactory(serviceRegistry);
 
             AdopterRepository adopterRepository = new AdopterRepository(factory);
 
