@@ -29,8 +29,8 @@ public class Vaccination implements Serializable  {
     private String data_ostatniego_szczepienia;
 
 
-    @ManyToOne
-    @JoinColumn(name="id__zwierzaka")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="zwierzak_id",nullable=false)
     private Animal animal;
 
 

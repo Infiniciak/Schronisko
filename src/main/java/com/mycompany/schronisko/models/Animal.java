@@ -5,6 +5,7 @@
 package com.mycompany.schronisko.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,7 +25,7 @@ import lombok.Setter;
 @Table(name = "zwierzaki",schema="public")
 public class Animal implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY,generator="zwierzaki_id_sequence")
     @Column(name="id")
     private Long id;
 
@@ -46,10 +47,11 @@ public class Animal implements Serializable {
     @Column(name = "status")
     private String status;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "animal")
-    private List<Adopter> adopter;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "animal")
-    private List<Vaccination> vaccination;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "animal",orphanRemoval = true)
+    private List<Vaccination> vaccination = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "animal",orphanRemoval = true)
+    private List<Adopter> adopter = new ArrayList<>();
 
 
     public Animal() {

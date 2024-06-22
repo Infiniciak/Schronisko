@@ -181,12 +181,19 @@ public class VaccinationController implements Initializable {
             /**
              *   Tworzenie obiektu szczepienia z podanymi danymi przez uzytkownika
              */
-            Vaccination newVaccination = new Vaccination(
-                    animalRepository.getById(Long.parseLong(fieldPetID.getText())).getId(),
-                    fieldVaccineType.getText(),
-                    String.valueOf(fieldFirstVaccination.getValue()),
-                    String.valueOf(fieldLastVaccination.getValue())
-            );
+            Animal animal = animalRepository.getById(Long.parseLong(fieldPetID.getText()));
+            Vaccination newVaccination = null;
+            if (animal != null) {
+                newVaccination = new Vaccination(animal.getId(), fieldVaccineType.getText(),
+                        String.valueOf(fieldFirstVaccination.getValue()), String.valueOf(fieldLastVaccination.getValue()));
+
+                // Set the animal property on the newVaccination object
+                newVaccination.setAnimal(animal);
+
+                // Save the newVaccination object
+            } else {
+                // Handle the case where the animal entity is not found
+            }
             System.out.println(newVaccination);
 
             VaccinationRepository vaccinationRepository = new VaccinationRepository(factory);

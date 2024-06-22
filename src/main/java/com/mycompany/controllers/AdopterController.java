@@ -7,6 +7,7 @@ package com.mycompany.controllers;
 
 
 import com.mycompany.schronisko.models.Adopter;
+import com.mycompany.schronisko.models.Vaccination;
 import com.mycompany.schronisko.respositories.AdopterRepository;
 import com.mycompany.schronisko.models.Animal;
 import com.mycompany.schronisko.respositories.AnimalRepository;
@@ -16,6 +17,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.*;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -153,9 +155,9 @@ public class AdopterController implements Initializable {
             AnimalRepository animalRepository = new AnimalRepository(factory);
             String[] array = {
                     String.valueOf(animalRepository.getById(Long.parseLong(fieldPetID.getText())).getId()),
-                    fieldName.getText(),
-                    fieldSurname.getText(),
                     String.valueOf(fieldDate.getValue()),
+                    fieldName.getText(),
+                    fieldSurname.getText()
             };
             /**
              *   Sprawdzanie podanych danych
@@ -169,18 +171,21 @@ public class AdopterController implements Initializable {
             /**
              *   Tworzenie obiektu adoptujacy z podanymi danymi przez uzytkownika
              */
+            Animal animal = animalRepository.getById(Long.parseLong(fieldPetID.getText()));
+            Adopter newAdopter = null;
+            if (animal != null) {
+                                newAdopter = new Adopter(animal.getId(),String.valueOf(fieldDate.getValue()),
+                        fieldSurname.getText(), String.valueOf(fieldDate.getValue()));
 
-            Adopter newAdopter = new Adopter(
-                    animalRepository.getById(Long.parseLong(fieldPetID.getText())).getId(),
-                    fieldSurname.getText(),
-                    String.valueOf(fieldDate.getValue()),
-                    fieldName.getText()
-            );
+                // Set the animal property on the newVaccination object
+                newAdopter.setAnimal(animal);
+
+                // Save the newVaccination object
+            } else {
+                // Handle the case where the animal entity is not found
+            }
             System.out.println(newAdopter);
-
             AdopterRepository adopterRepository = new AdopterRepository(factory);
-
-
             adopterRepository.save(newAdopter);
 
         }
@@ -198,11 +203,17 @@ public class AdopterController implements Initializable {
         for (Adopter a : la) {
             ols.add(a);
         }
-
-        colPetID.setCellValueFactory(new PropertyValueFactory<>("id_zwierzaka"));
+        AnimalRepository animalRepository = new AnimalRepository(factory);
+        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("imie"));
         colSurname.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("dataadopcji"));
+        if (fieldPetID.getText().isEmpty()) {
+            // Handle the case where the input string is empty
+        } else {
+            Long petId = animalRepository.getById(Long.parseLong(fieldPetID.getText())).getId();
+            colPetID.setCellValueFactory(cellData -> new SimpleObjectProperty<Long>(petId));
+        }
         table.setItems(ols);
 
         if (selectedAdopter != null) {
@@ -224,7 +235,7 @@ public class AdopterController implements Initializable {
      *  Stworzenie kolumny dla ID
      */
     @FXML
-    public TableColumn<Adopter, Integer> colID;
+    public TableColumn<Adopter, Long> colID;
     /**
      *  Stworzenie kolumny dla imienia
      */
@@ -244,7 +255,7 @@ public class AdopterController implements Initializable {
      *  Stworzenie kolumny dla daty adopcji
      */
     @FXML
-    public TableColumn<Animal, DatePicker> colDate;
+    public TableColumn<Adopter, DatePicker> colDate;
 
     /**
      *  Stworzenie elementu do wybrania elementu

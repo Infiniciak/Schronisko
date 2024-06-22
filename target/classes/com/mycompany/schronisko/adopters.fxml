@@ -14,13 +14,13 @@
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
             <children>
-                <Label layoutX="400.0" layoutY="105.0" text="Data adopcji" />
-                <Label layoutX="400.0" layoutY="140.0" text="ID zwierzaka" />
+                <Label layoutX="400.0" layoutY="105.0" text="ID zwierzaka" />
+                <Label layoutX="400.0" layoutY="140.0" text="Data adopcji" />
                 <Label layoutX="400.0" layoutY="175.0" text="Imię" />
                 <Label layoutX="400.0" layoutY="210.0" text="Nazwisko" />
-                <TextField fx:id="fieldPetID" layoutX="495.0" layoutY="140.0" />
+                <TextField fx:id="fieldDate" layoutX="495.0" layoutY="140.0" />
                 <TextField fx:id="fieldName" layoutX="495.0" layoutY="175.0" />
-                <DatePicker fx:id="fieldDate" layoutX="495.0" layoutY="105.0" />
+                <DatePicker fx:id="fieldPetID" layoutX="495.0" layoutY="105.0" />
                 <TextField fx:id="fieldSurname" layoutX="495.0" layoutY="210.0" />
                 <TableView fx:id="table" layoutX="309.0" layoutY="432.0" prefHeight="208.0" prefWidth="480.0">
                     <columns>

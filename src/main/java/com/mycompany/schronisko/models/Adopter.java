@@ -1,8 +1,6 @@
 package com.mycompany.schronisko.models;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,34 +8,30 @@ import java.io.Serializable;
 /**
  *Klasa obslugujaca adoptujacych
  */
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@Entity
-@ToString
 @Table(name = "adoptujacy",schema="public")
 public class Adopter implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
-
     @Column(name = "dataadopcji")
     private String dataadopcji;
-
     @Column(name = "imie")
     private String imie;
-
     @Column(name = "nazwisko")
     private String nazwisko;
 
-    @ManyToOne
-    @JoinColumn(name="id_zwierzaka",insertable = false,updatable = false)
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_zwierzaka",nullable=false)
     private Animal animal;
 
-    public Adopter()
-    {
-
-    }
 
     public Adopter(Long id,String imie,String nazwisko,String dataadopcji)
     {
