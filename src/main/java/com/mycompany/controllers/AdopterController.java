@@ -175,14 +175,9 @@ public class AdopterController implements Initializable {
             Adopter newAdopter = null;
             if (animal != null) {
                                 newAdopter = new Adopter(animal.getId(),String.valueOf(fieldDate.getValue()),
-                        fieldSurname.getText(), String.valueOf(fieldDate.getValue()));
-
-                // Set the animal property on the newVaccination object
+                        fieldName.getText(), fieldSurname.getText());
                 newAdopter.setAnimal(animal);
-
-                // Save the newVaccination object
             } else {
-                // Handle the case where the animal entity is not found
             }
             System.out.println(newAdopter);
             AdopterRepository adopterRepository = new AdopterRepository(factory);
@@ -203,17 +198,17 @@ public class AdopterController implements Initializable {
         for (Adopter a : la) {
             ols.add(a);
         }
-        AnimalRepository animalRepository = new AnimalRepository(factory);
+
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("imie"));
         colSurname.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
+        colPetID.setCellValueFactory(cellData -> {
+            Long petId = cellData.getValue().getAnimal().getId();
+            return new SimpleObjectProperty<>(petId);
+        });
         colDate.setCellValueFactory(new PropertyValueFactory<>("dataadopcji"));
-        if (fieldPetID.getText().isEmpty()) {
-            // Handle the case where the input string is empty
-        } else {
-            Long petId = animalRepository.getById(Long.parseLong(fieldPetID.getText())).getId();
-            colPetID.setCellValueFactory(cellData -> new SimpleObjectProperty<Long>(petId));
-        }
+        colName.setCellValueFactory(new PropertyValueFactory<>("imie"));
+
+
         table.setItems(ols);
 
         if (selectedAdopter != null) {
@@ -268,6 +263,8 @@ public class AdopterController implements Initializable {
     @FXML
     public void updateAdopter() {
         try {
+            AnimalRepository animalRepository = new AnimalRepository(factory);
+            Animal animal = animalRepository.getById(Long.parseLong(fieldPetID.getText()));
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Potwierdzenie aktualizacji");
             dialog.setHeaderText("Czy jesteś pewny?");
@@ -284,12 +281,13 @@ public class AdopterController implements Initializable {
                     for (Adopter a : adopterRepository.getAll()) {
                         System.out.println(a);
                         if (a.getId() == selected.getId()) {
-                            Adopter newAdopter = new Adopter(
-                                    (Long) selected.getId(),
-                                    fieldName.getText(),
-                                    fieldSurname.getText(),
-                                    String.valueOf(fieldDate.getValue())
-                            );
+                            Adopter newAdopter = null;
+                            if (animal != null) {
+                                newAdopter = new Adopter(animal.getId(), String.valueOf(fieldDate.getValue()),
+                                        fieldName.getText(),fieldSurname.getText());
+                                newAdopter.setAnimal(animal);
+                            } else {
+                            }
 
                             adopterRepository.update(newAdopter);
                         }
@@ -348,9 +346,9 @@ public class AdopterController implements Initializable {
         List<Adopter> allAdopters = ar.getAll();
         ObservableList<Adopter> filteredAdopters = FXCollections.observableArrayList();
         for (Adopter adopter : allAdopters) {
-            if (adopter.getImie().toLowerCase().contains(searchName.toLowerCase()) ||
-                    adopter.getNazwisko().toLowerCase().contains(searchName.toLowerCase()) ||
-                            adopter.getDataadopcji().toLowerCase().contains(searchName.toLowerCase())) {
+            if (adopter.getDataadopcji().toLowerCase().contains(searchName.toLowerCase()) ||
+                    adopter.getImie().toLowerCase().contains(searchName.toLowerCase()) ||
+                            adopter.getNazwisko().toLowerCase().contains(searchName.toLowerCase())) {
                 filteredAdopters.add(adopter);
             }
         }

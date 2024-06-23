@@ -210,14 +210,14 @@ public class VaccinationController implements Initializable {
         for (Vaccination v : lv) {
             ols.add(v);
         }
-
-        AnimalRepository animalRepository = new AnimalRepository(factory);
-        Animal petID = animalRepository.getById(Long.parseLong(fieldPetID));
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colVaccineType.setCellValueFactory(new PropertyValueFactory<>("rodzaj_szczepienia"));
         colFirstVaccination.setCellValueFactory(new PropertyValueFactory<>("data_pierwszego_szczepienia"));
         colLastVaccination.setCellValueFactory(new PropertyValueFactory<>("data_ostatniego_szczepienia"));
-        colPetID.setCellValueFactory(new PropertyValueFactory<>("animal"));
+        colPetID.setCellValueFactory(cellData -> {
+            Long petId = cellData.getValue().getAnimal().getId();
+            return new SimpleObjectProperty<>(petId);
+        });
 
         table.setItems(ols);
 

@@ -27,7 +27,7 @@
                         <TableColumn fx:id="colID" text="ID_osoby" />
                         <TableColumn fx:id="colDate" prefWidth="112.0" text="Data_adopcji" />
                         <TableColumn fx:id="colPetID" prefWidth="104.0" text="ID_zwierzaka" />
-                        <TableColumn fx:id="colName" prefWidth="80.800048828125" text="Imię" />
+                        <TableColumn fx:id="colName" prefWidth="80.800048828125" text="Imie" />
                         <TableColumn fx:id="colSurname" prefWidth="104.7999267578125" text="Nazwisko" />
                     </columns>
                 </TableView>
