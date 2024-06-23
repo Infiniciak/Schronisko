@@ -174,8 +174,9 @@ public class AdopterController implements Initializable {
             Animal animal = animalRepository.getById(Long.parseLong(fieldPetID.getText()));
             Adopter newAdopter = null;
             if (animal != null) {
-                                newAdopter = new Adopter(animal.getId(),String.valueOf(fieldDate.getValue()),
-                        fieldName.getText(), fieldSurname.getText());
+                                newAdopter = new Adopter(animal.getId(),fieldName.getText(),fieldSurname.getText()
+                                        ,String.valueOf(fieldDate.getValue()));
+
                 newAdopter.setAnimal(animal);
             } else {
             }
@@ -283,12 +284,11 @@ public class AdopterController implements Initializable {
                         if (a.getId() == selected.getId()) {
                             Adopter newAdopter = null;
                             if (animal != null) {
-                                newAdopter = new Adopter(animal.getId(), String.valueOf(fieldDate.getValue()),
-                                        fieldName.getText(),fieldSurname.getText());
+                                newAdopter = new Adopter(animal.getId(),fieldName.getText(),fieldSurname.getText()
+                                        ,String.valueOf(fieldDate.getValue()));
                                 newAdopter.setAnimal(animal);
                             } else {
                             }
-
                             adopterRepository.update(newAdopter);
                         }
 

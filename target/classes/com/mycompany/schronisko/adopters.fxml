@@ -26,9 +26,9 @@
                     <columns>
                         <TableColumn fx:id="colID" text="ID_osoby" />
                         <TableColumn fx:id="colDate" prefWidth="112.0" text="Data_adopcji" />
-                        <TableColumn fx:id="colPetID" prefWidth="104.0" text="ID_zwierzaka" />
+                        <TableColumn fx:id="colSurname" prefWidth="104.0" text="Nazwisko" />
                         <TableColumn fx:id="colName" prefWidth="80.800048828125" text="Imie" />
-                        <TableColumn fx:id="colSurname" prefWidth="104.7999267578125" text="Nazwisko" />
+                        <TableColumn fx:id="colPetID" prefWidth="104.7999267578125" text="ID_zwierzaka" />
                     </columns>
                 </TableView>
                 <Button fx:id="buttonNew" layoutX="309.0" layoutY="292.0" mnemonicParsing="false" onAction="#addAdopter" text="Dodaj" />

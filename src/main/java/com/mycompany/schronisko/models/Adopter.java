@@ -40,6 +40,7 @@ public class Adopter implements Serializable {
         this.nazwisko=nazwisko;
         this.dataadopcji=dataadopcji;
     }
+    
 
     public Adopter(String imie,String nazwisko,String dataadopcji)
     {
