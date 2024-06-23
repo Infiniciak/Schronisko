@@ -186,13 +186,9 @@ public class VaccinationController implements Initializable {
             if (animal != null) {
                 newVaccination = new Vaccination(animal.getId(), fieldVaccineType.getText(),
                         String.valueOf(fieldFirstVaccination.getValue()), String.valueOf(fieldLastVaccination.getValue()));
-
-                // Set the animal property on the newVaccination object
                 newVaccination.setAnimal(animal);
-
-                // Save the newVaccination object
             } else {
-                // Handle the case where the animal entity is not found
+
             }
             System.out.println(newVaccination);
 
@@ -226,8 +222,6 @@ public class VaccinationController implements Initializable {
             Long petId = animalRepository.getById(Long.parseLong(fieldPetID.getText())).getId();
             colPetID.setCellValueFactory(cellData -> new SimpleObjectProperty<Long>(petId));
         }
-
-
         table.setItems(ols);
 
         if (selectedVaccination != null) {
@@ -282,6 +276,8 @@ public class VaccinationController implements Initializable {
      */
     @FXML public void updateVaccinations() {
         try {
+            AnimalRepository animalRepository = new AnimalRepository(factory);
+            Animal animal = animalRepository.getById(Long.parseLong(fieldPetID.getText()));
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Potwierdzenie aktualizacji");
             dialog.setHeaderText("Czy jesteś pewny?");
@@ -298,12 +294,14 @@ public class VaccinationController implements Initializable {
                     for (Vaccination v : vaccinationRepository.getAll()) {
                         System.out.println(v);
                         if (v.getId() == selected.getId()) {
-                            Vaccination newVaccination = new Vaccination(
-                                    (Long) selected.getId(),
-                                    fieldVaccineType.getText(),
-                                    String.valueOf(fieldFirstVaccination.getValue()),
-                                    String.valueOf(fieldLastVaccination.getValue())
-                            );
+                           Vaccination newVaccination = null;
+                            if (animal != null) {
+                                newVaccination = new Vaccination(animal.getId(), fieldVaccineType.getText(),
+                                        String.valueOf(fieldFirstVaccination.getValue()), String.valueOf(fieldLastVaccination.getValue()));
+                                newVaccination.setAnimal(animal);
+                            } else {
+                            }
+
                             vaccinationRepository.update(newVaccination);
                         }
 
