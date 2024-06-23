@@ -212,6 +212,7 @@ public class VaccinationController implements Initializable {
         }
 
         AnimalRepository animalRepository = new AnimalRepository(factory);
+        Animal petID = animalRepository.getById(Long.parseLong(fieldPetID));
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colVaccineType.setCellValueFactory(new PropertyValueFactory<>("rodzaj_szczepienia"));
         colFirstVaccination.setCellValueFactory(new PropertyValueFactory<>("data_pierwszego_szczepienia"));
