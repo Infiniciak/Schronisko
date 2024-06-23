@@ -179,6 +179,7 @@ public class AdopterController implements Initializable {
 
                 newAdopter.setAnimal(animal);
             } else {
+                System.out.println("Blad");
             }
             System.out.println(newAdopter);
             AdopterRepository adopterRepository = new AdopterRepository(factory);
@@ -288,6 +289,7 @@ public class AdopterController implements Initializable {
                                         ,String.valueOf(fieldDate.getValue()));
                                 newAdopter.setAnimal(animal);
                             } else {
+                                System.out.println("Blad");
                             }
                             adopterRepository.update(newAdopter);
                         }

@@ -188,7 +188,7 @@ public class VaccinationController implements Initializable {
                         String.valueOf(fieldFirstVaccination.getValue()), String.valueOf(fieldLastVaccination.getValue()));
                 newVaccination.setAnimal(animal);
             } else {
-
+                System.out.println("Blad");
             }
             System.out.println(newVaccination);
 
@@ -297,6 +297,7 @@ public class VaccinationController implements Initializable {
                                         String.valueOf(fieldFirstVaccination.getValue()), String.valueOf(fieldLastVaccination.getValue()));
                                 newVaccination.setAnimal(animal);
                             } else {
+                                System.out.println("Blad");
                             }
 
                             vaccinationRepository.update(newVaccination);
