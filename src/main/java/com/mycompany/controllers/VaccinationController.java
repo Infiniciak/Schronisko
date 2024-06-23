@@ -194,6 +194,7 @@ public class VaccinationController implements Initializable {
 
             VaccinationRepository vaccinationRepository = new VaccinationRepository(factory);
             vaccinationRepository.save(newVaccination);
+            showVaccinations();
         }
 
     }

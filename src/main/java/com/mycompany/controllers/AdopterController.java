@@ -184,7 +184,7 @@ public class AdopterController implements Initializable {
             System.out.println(newAdopter);
             AdopterRepository adopterRepository = new AdopterRepository(factory);
             adopterRepository.save(newAdopter);
-
+            showAdopters();
         }
 
     }
