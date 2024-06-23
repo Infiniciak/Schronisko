@@ -216,12 +216,8 @@ public class VaccinationController implements Initializable {
         colVaccineType.setCellValueFactory(new PropertyValueFactory<>("rodzaj_szczepienia"));
         colFirstVaccination.setCellValueFactory(new PropertyValueFactory<>("data_pierwszego_szczepienia"));
         colLastVaccination.setCellValueFactory(new PropertyValueFactory<>("data_ostatniego_szczepienia"));
-        if (fieldPetID.getText().isEmpty()) {
-            // Handle the case where the input string is empty
-        } else {
-            Long petId = animalRepository.getById(Long.parseLong(fieldPetID.getText())).getId();
-            colPetID.setCellValueFactory(cellData -> new SimpleObjectProperty<Long>(petId));
-        }
+        colPetID.setCellValueFactory(new PropertyValueFactory<>("animal"));
+
         table.setItems(ols);
 
         if (selectedVaccination != null) {
